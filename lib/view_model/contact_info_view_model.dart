@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:web/web.dart' as web;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../core/utils/keys.dart';
 import '../core/widgets/custom_toast.dart';
@@ -41,7 +42,11 @@ class ContactInfoViewModel with ChangeNotifier {
       _addHiddenInput(form, 'message', message);
 
       // 4. FormSubmit optional fields
-      _addHiddenInput(form, '_next', 'https://my-portfolio-1f4cd.web.app/');
+      // Read the redirect URL from env; if provided, add the _next field
+      final redirectUrl = dotenv.env['PORTFOLIO_WEB_URL'];
+      if (redirectUrl != null && redirectUrl.isNotEmpty) {
+        _addHiddenInput(form, '_next', redirectUrl);
+      }
       _addHiddenInput(form, '_captcha', 'false');
       _addHiddenInput(form, '_template', 'table');
       _addHiddenInput(form, '_subject', 'New Contact from Portfolio Site');
