@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "822476086283",
+    "project_id": "mohit-portfolio-db1ad",
+    "storage_bucket": "mohit-portfolio-db1ad.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822476086283:android:a95c93067c1ac4f78c7b0e",
+        "android_client_info": {
+          "package_name": "com.mohitOS.mohit_portfolio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgXgLqgDBruxdSysYAVSkc5R20jqZWTlY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
