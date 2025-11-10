@@ -1,6 +1,7 @@
 {
   "hosting": {
     "public": "build/web",
+    "site": "mohit-portfolio-db1ad",
     "ignore": [
       "firebase.json",
       "**/.*",

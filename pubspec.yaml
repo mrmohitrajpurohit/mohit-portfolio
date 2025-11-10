@@ -27,7 +27,6 @@ dependencies:
   web: ^1.1.1
   firebase_core: ^3.15.1
   cloud_firestore: ^5.6.11
-  flutter_dotenv: ^6.0.0
 
 dev_dependencies:
   flutter_test:
@@ -41,7 +40,6 @@ flutter:
     - assets/images/
     - assets/services_cards/
     - assets/projects/
-    - assets/.env
 
   # Optional: Add fonts section if using custom fonts manually (skip if using google_fonts)
   # fonts:
