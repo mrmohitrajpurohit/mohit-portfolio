@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:web/web.dart' as web;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../core/utils/keys.dart';
 import '../core/widgets/custom_toast.dart';
@@ -43,7 +42,7 @@ class ContactInfoViewModel with ChangeNotifier {
 
       // 4. FormSubmit optional fields
       // Read the redirect URL from env; if provided, add the _next field
-      final redirectUrl = dotenv.env['PORTFOLIO_WEB_URL'];
+      final redirectUrl = "www.google.com"; // Replace with your redirect URL or fetch from env
       if (redirectUrl != null && redirectUrl.isNotEmpty) {
         _addHiddenInput(form, '_next', redirectUrl);
       }
