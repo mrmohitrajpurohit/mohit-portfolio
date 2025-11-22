@@ -28,9 +28,9 @@ class HeroSection extends StatelessWidget {
 
               const SizedBox(height: 18),
 
-              // SHORT TAGLINE
+              // NEW SHORT TAGLINE (Approved Option B)
               Text(
-                "Software Developer — App • Web • AI",
+                "Cross-platform Developer — Android • Flutter • React Native • Web • AI",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w500,
@@ -40,13 +40,12 @@ class HeroSection extends StatelessWidget {
 
               const SizedBox(height: 26),
 
-              // MEDIUM TAGLINE (3 LINES)
+              // NEW MEDIUM TAGLINE
               SizedBox(
                 width: 500,
                 child: Text(
-                  "Building intelligent digital experiences across mobile, web,\n"
-                      "and AI-driven ecosystems. From powerful AI assistants to\n"
-                      "real-world apps and scalable production systems.",
+                  "Building intelligent, scalable mobile and web apps with modern technologies. "
+                      "Experienced in Android Kotlin, Flutter, React Native, Next.js, FastAPI, and AI automation.",
                   style: TextStyle(
                     fontSize: 18,
                     height: 1.55,
@@ -62,9 +61,7 @@ class HeroSection extends StatelessWidget {
                 children: [
                   // PROJECTS BUTTON
                   ElevatedButton(
-                    onPressed: () {
-                      // scroll from navbar will be used
-                    },
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.black,
                       foregroundColor: Colors.white,
@@ -85,11 +82,9 @@ class HeroSection extends StatelessWidget {
 
                   const SizedBox(width: 20),
 
-                  // DOWNLOAD RESUME BUTTON (outlined premium style)
+                  // RESUME BUTTON
                   OutlinedButton(
-                    onPressed: () {
-                      // open resume later
-                    },
+                    onPressed: () {},
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 34,
