@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mohit_portfolio/screens/home_screen.dart';
+import 'package:mohit_portfolio/screens/home/home_screen.dart';
 
 import 'core/utils/keys.dart';
 
