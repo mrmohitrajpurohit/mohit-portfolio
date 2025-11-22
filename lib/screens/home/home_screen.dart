@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mohit_portfolio/screens/contact_info/contact_info.dart';
 
+import '../../view_model/home_view_model.dart';
 import '../hero/hero.dart';
 import '../widget/navbar.dart';
 import '../widget/sections/about_section.dart';
@@ -49,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Container(key: projectsKey, child: const ProjectsSection()),
                 Container(key: aiKey, child: const AIWorkSection()),
                 Container(key: skillsKey, child: const SkillsSection()),
-                Container(key: contactKey, child: const ContactSection()),
+                Container(key: contactKey, child: ContactInfo(model: HomeViewModel()) ),
               ],
             ),
           ),
