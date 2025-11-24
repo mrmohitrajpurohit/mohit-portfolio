@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mohit_portfolio/screens/contact_info/contact_info.dart';
+import 'package:mohit_portfolio/screens/widget/sections/certifications_section.dart';
 
 import '../../view_model/home_view_model.dart';
 import '../hero/hero.dart';
@@ -25,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final aboutKey = GlobalKey();
   final projectsKey = GlobalKey();
   final aiKey = GlobalKey();
+  final aiKey2 = GlobalKey();
   final skillsKey = GlobalKey();
   final contactKey = GlobalKey();
 
@@ -50,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Container(key: aboutKey, child: const AboutSection()),
                 Container(key: projectsKey, child: const ProjectsSection()),
                 Container(key: aiKey, child: const AIWorkSection()),
+                Container(key: aiKey2, child: const CertificationsSection()),
                 Container(key: skillsKey, child: const SkillsSection()),
                 Container(key: contactKey, child: ContactInfo(model: HomeViewModel()) ),
               ],
