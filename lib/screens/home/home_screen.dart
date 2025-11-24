@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final aboutKey = GlobalKey();
   final projectsKey = GlobalKey();
   final aiKey = GlobalKey();
-  final aiKey2 = GlobalKey();
+  final achievementKey = GlobalKey();
   final skillsKey = GlobalKey();
   final contactKey = GlobalKey();
 
@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Container(key: aboutKey, child: const AboutSection()),
                 Container(key: projectsKey, child: const ProjectsSection()),
                 Container(key: aiKey, child: const AIWorkSection()),
-                Container(key: aiKey2, child: const CertificationsSection()),
+                Container(key: achievementKey, child: const CertificationsSection()),
                 Container(key: skillsKey, child: const SkillsSection()),
                 Container(key: contactKey, child: ContactInfo(model: HomeViewModel()) ),
               ],
@@ -70,6 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onProjects: () => scrollTo(projectsKey),
               onAIWork: () => scrollTo(aiKey),
               onSkills: () => scrollTo(skillsKey),
+              onAchievement: () => scrollTo(achievementKey),
               onContact: () => scrollTo(contactKey),
             ),
           ),

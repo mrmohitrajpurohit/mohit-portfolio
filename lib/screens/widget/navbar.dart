@@ -6,6 +6,7 @@ class NavBar extends StatelessWidget {
   final VoidCallback onProjects;
   final VoidCallback onAIWork;
   final VoidCallback onSkills;
+  final VoidCallback onAchievement;
   final VoidCallback onContact;
 
   const NavBar({
@@ -15,6 +16,7 @@ class NavBar extends StatelessWidget {
     required this.onProjects,
     required this.onAIWork,
     required this.onSkills,
+    required this.onAchievement,
     required this.onContact,
   });
 
@@ -55,6 +57,7 @@ class NavBar extends StatelessWidget {
               _navButton("Projects", onProjects),
               _navButton("AI Work", onAIWork),
               _navButton("Skills", onSkills),
+              _navButton("Achievements", onAchievement),
               _navButton("Contact", onContact),
             ],
           ),
