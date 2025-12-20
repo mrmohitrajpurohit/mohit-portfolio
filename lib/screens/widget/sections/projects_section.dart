@@ -32,7 +32,7 @@ class _ProjectsSectionState extends State<ProjectsSection> with SingleTickerProv
   final List<Map<String, dynamic>> _appProjects = [
     {
       'title': 'AI Chef',
-      'thumb': 'assets/projects/ai_chef/app_1.png',
+      'thumb': 'assets/projects/ai_chef_thumbnail.png',
       'desc': 'Recipe suggestion app: build recipes from ingredients. College project (Flutter + Firebase + NodeJS).',
       'tech': ['Flutter', 'Firebase', 'NodeJS'],
       'playStore': null,
@@ -41,7 +41,7 @@ class _ProjectsSectionState extends State<ProjectsSection> with SingleTickerProv
     },
     {
       'title': 'Kirana Friends',
-      'thumb': 'assets/projects/kirana/app_1.png',
+      'thumb': 'assets/projects/kirana_friends_thumbnail.png',
       'desc': 'Community app for kirana operators. Android Kotlin app (internship).',
       'tech': ['Android (Kotlin)'],
       'playStore': null,
@@ -50,7 +50,7 @@ class _ProjectsSectionState extends State<ProjectsSection> with SingleTickerProv
     },
     {
       'title': 'Vehya',
-      'thumb': 'assets/projects/vehya/app_1.png',
+      'thumb': 'assets/projects/sendee_thumbnail.png',
       'desc': 'Marketplace with AI chat support and ML/AR demos. Flutter + Firebase.',
       'tech': ['Flutter', 'Firebase', 'AI Chat'],
       'playStore': null,
@@ -59,16 +59,16 @@ class _ProjectsSectionState extends State<ProjectsSection> with SingleTickerProv
     },
     {
       'title': 'Sendee',
-      'thumb': 'assets/projects/sendee/app_1.png',
+      'thumb': 'assets/projects/sendee_thumbnail.png',
       'desc': 'Service marketplace app with unique UI and booking flows.',
-      'tech': ['Flutter', 'Next.js'],
+      'tech': ['Flutter'],
       'playStore': 'https://play.google.com/store/apps/details?id=com.sendee.customer&hl=en_IN',
       'live': 'https://sendee.com/home',
       'status': 'Live',
     },
     {
       'title': 'Kurudy (App)',
-      'thumb': 'assets/projects/kurudy/app_1.png',
+      'thumb': 'assets/projects/kurudy_thumbnail.png',
       'desc': 'Investment platform mobile app (React Native).',
       'tech': ['React Native', 'NodeJS'],
       'playStore': 'https://play.google.com/store/apps/details?id=com.kurudy&hl=en_IN',
@@ -77,7 +77,7 @@ class _ProjectsSectionState extends State<ProjectsSection> with SingleTickerProv
     },
     {
       'title': 'Disctopia (App)',
-      'thumb': 'assets/projects/disctopia/app_1.png',
+      'thumb': 'assets/projects/disctopia_thumbnail.png',
       'desc': 'Music & Podcasts mobile app with creator-first features.',
       'tech': ['React Native', 'Firebase'],
       'playStore': 'https://play.google.com/store/apps/details?id=com.disctopia.android&hl=en_IN',
@@ -87,6 +87,56 @@ class _ProjectsSectionState extends State<ProjectsSection> with SingleTickerProv
   ];
 
   final List<Map<String, dynamic>> _webProjects = [
+    {
+      'title': 'Disctopia (Web)',
+      'thumb': 'assets/projects/disctopia_web.png',
+      'desc': 'Disctopia web streaming and creator tools (Next.js).',
+      'tech': ['Next.js', '.NET', 'Azure Portal'],
+      'live': 'https://disctopia.com/',
+      'screenshots': [
+        'assets/projects/disctopia_ss1.png',
+        'assets/projects/disctopia_ss2.png',
+        'assets/projects/disctopia_ss3.png',
+      ],
+      'status': 'Live',
+    },
+    {
+      'title': 'Wavve (Web)',
+      'thumb': 'assets/projects/wavve_web.png',
+      'desc': 'Podcast tools & clip creation (Next.js + AWS).',
+      'tech': ['Next.js', 'AWS', 'Lambdas', 'microservices'],
+      'live': 'https://power.wavve.co/',
+      'screenshots': [
+        'assets/projects/wavve_web_ss1.png',
+        'assets/projects/wavve_web_ss2.png',
+        'assets/projects/wavve_web_ss3.png',
+      ],
+      'status': 'Live',
+    },
+    {
+      'title': 'Kurudy (Web)',
+      'thumb': 'assets/projects/kurudy_web.png',
+      'desc': 'Kurudy investor portal and marketing site (Next.js).',
+      'tech': ['Next.js', 'Node'],
+      'live': 'https://www.kurudy.com/',
+      'screenshots': [
+        'assets/projects/kurudy_web_ss1.png',
+        'assets/projects/kurudy_web_ss2.png',
+      ],
+      'status': 'Live',
+    },
+    {
+      'title': 'Nandi Food ERP',
+      'thumb': 'assets/projects/nandifood_web.png',
+      'desc': 'ERP for Nandi Food — inventory and business management.',
+      'tech': ['Next.js', 'NodeJS', 'ERP system'],
+      'live': 'https://erp.nandifoods.com/login',
+      'screenshots': [
+        'assets/projects/nandifood_ss1.png',
+        'assets/projects/nandifood_ss2.png',
+      ],
+      'status': 'Live',
+    },
     {
       'title': 'AI Chef (Web)',
       'thumb': 'assets/projects/web/ai_chef_web.png',
@@ -100,7 +150,7 @@ class _ProjectsSectionState extends State<ProjectsSection> with SingleTickerProv
       'title': 'Sendee (Web)',
       'thumb': 'assets/projects/web/sendee_web.png',
       'desc': 'Sendee web portal built with Next.js.',
-      'tech': ['Next.js'],
+      'tech': ['Next.js', 'Node'],
       'live': 'https://sendee.com/home',
       'status': 'Live',
       'screenshots': [
@@ -108,38 +158,6 @@ class _ProjectsSectionState extends State<ProjectsSection> with SingleTickerProv
         'assets/projects/sendee/screens/s2.png',
         'assets/projects/sendee/screens/s3.png',
       ],
-    },
-    {
-      'title': 'Kurudy (Web)',
-      'thumb': 'assets/projects/web/kurudy_web.png',
-      'desc': 'Kurudy investor portal and marketing site (Next.js).',
-      'tech': ['Next.js'],
-      'live': 'https://www.kurudy.com/',
-      'status': 'Live',
-    },
-    {
-      'title': 'Nandi Food ERP',
-      'thumb': 'assets/projects/web/nandi_web.png',
-      'desc': 'ERP for Nandi Food — inventory and business management.',
-      'tech': ['Next.js', 'NodeJS'],
-      'live': 'https://erp.nandifoods.com/login',
-      'status': 'Live',
-    },
-    {
-      'title': 'Disctopia (Web)',
-      'thumb': 'assets/projects/web/disctopia_web.png',
-      'desc': 'Disctopia web streaming and creator tools (Next.js).',
-      'tech': ['Next.js'],
-      'live': 'https://disctopia.com/',
-      'status': 'Live',
-    },
-    {
-      'title': 'Wavve (Web)',
-      'thumb': 'assets/projects/web/wavve_web.png',
-      'desc': 'Podcast tools & clip creation (Next.js + AWS).',
-      'tech': ['Next.js', 'AWS'],
-      'live': 'https://power.wavve.co/',
-      'status': 'Live',
     },
   ];
 
