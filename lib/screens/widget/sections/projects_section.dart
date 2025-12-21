@@ -43,9 +43,9 @@ class ProjectsSection extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: count,
-          mainAxisSpacing: 24,
+          mainAxisSpacing: 35,
           crossAxisSpacing: 24,
-          childAspectRatio: 0.92,
+          childAspectRatio: 1.8,
         ),
         itemBuilder: (_, i) => ProjectCarouselCard(data: mergedProjects[i]),
       );

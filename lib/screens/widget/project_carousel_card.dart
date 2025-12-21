@@ -90,7 +90,7 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard> {
                 Positioned.fill(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 30),
+                        horizontal: 0, vertical: 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -129,15 +129,17 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard> {
                           spacing: 8,
                           children: project['tech']
                               .map<Widget>(
-                                (t) => Chip(
-                              label: Text(t,
-                                  style: const TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.black)),
-                              backgroundColor: Colors.white,
-                              visualDensity:
-                              VisualDensity.compact,
-                            ),
+                                (t) =>
+                                    OutlinedButton.icon(
+                                      onPressed: () =>
+                                          {},
+                                      label:  Text(t),
+                                      style: OutlinedButton.styleFrom(
+                                        foregroundColor: Colors.white,
+                                        side:
+                                        const BorderSide(color: Colors.white54),
+                                      ),
+                                    ),
                           )
                               .toList(),
                         ),
@@ -149,14 +151,15 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             if (project['playStore'] != null)
-                              ElevatedButton.icon(
+                              OutlinedButton.icon(
                                 onPressed: () =>
                                     _open(project['playStore']),
                                 icon: const Icon(Icons.android, size: 16),
                                 label: const Text("Play Store"),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  foregroundColor: Colors.black,
+                                style: OutlinedButton.styleFrom(
+                                  foregroundColor: Colors.white,
+                                  side:
+                                  const BorderSide(color: Colors.white54),
                                 ),
                               ),
                             if (project['playStore'] != null)
