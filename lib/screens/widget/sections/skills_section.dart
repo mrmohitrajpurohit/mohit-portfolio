@@ -56,23 +56,18 @@ class SkillsSection extends StatelessWidget {
                     {
                       "name": "Flutter",
                       "level": 0.95,
-                      "icon": "assets/skills/flutter.png"
+                      "icon": "assets/icons/flutter_icon.png"
                     },
                     {
-                      "name": "Dart",
+                      "name": "Android/Kotlin",
                       "level": 0.92,
-                      "icon": "assets/skills/dart.png"
+                      "icon": "assets/icons/kotlin_icon.png"
                     },
                     {
                       "name": "React Native",
                       "level": 0.70,
-                      "icon": "assets/skills/react_native.png"
-                    },
-                    {
-                      "name": "Android Kotlin",
-                      "level": 0.40,
-                      "icon": "assets/skills/kotlin.png"
-                    },
+                      "icon": "assets/icons/react_native_icon.png"
+                    }
                   ],
                 ),
 
@@ -83,60 +78,60 @@ class SkillsSection extends StatelessWidget {
                     {
                       "name": "Next.js",
                       "level": 0.75,
-                      "icon": "assets/skills/nextjs.png"
+                      "icon": "assets/icons/nextjs.png"
                     },
                     {
                       "name": "React.js",
                       "level": 0.72,
-                      "icon": "assets/skills/react.png"
+                      "icon": "assets/icons/reacts_icon.png"
                     },
                     {
-                      "name": "TypeScript",
-                      "level": 0.70,
-                      "icon": "assets/skills/typescript.png"
+                      "name": "Flutter",
+                      "level": 0.90,
+                      "icon": "assets/icons/flutter_icon.png"
                     },
                   ],
                 ),
 
                 // BACKEND + AI
                 _skillCategory(
-                  "Backend • AI • Cloud",
+                  "Backend • AI • Devops",
                   [
                     {
                       "name": "Python",
-                      "level": 0.75,
-                      "icon": "assets/skills/python.png"
+                      "level": 0.30,
+                      "icon": "assets/icons/python_icon.png"
                     },
                     {
-                      "name": "FastAPI",
-                      "level": 0.72,
-                      "icon": "assets/skills/fastapi.png"
-                    },
-                    {
-                      "name": "LangChain",
-                      "level": 0.68,
-                      "icon": "assets/skills/langchain.png"
+                        "name": "FastAPI • LangChain",
+                      "level": 0.30,
+                        "icon": "assets/icons/fastapi_icon.png"
                     },
                     {
                       "name": "Firebase",
                       "level": 0.78,
-                      "icon": "assets/skills/firebase.png"
+                      "icon": "assets/icons/firebase_icon.png"
                     },
                     {
                       "name": "NodeJS",
-                      "level": 0.65,
-                      "icon": "assets/skills/nodejs.png"
+                      "level": 0.20,
+                      "icon": "assets/icons/nodejs_icon.png"
                     },
                     {
-                      "name": "NestJS",
-                      "level": 0.45,
-                      "icon": "assets/skills/nestjs.png"
+                      "name": ".NET • NestJS",
+                      "level": 0.30,
+                      "icon": "assets/icons/nestjs_icon.png"
                     },
                     {
-                      "name": "AWS",
-                      "level": 0.40,
-                      "icon": "assets/skills/aws.png"
+                      "name": "AWS • Lambdas • Microservices",
+                      "level": 0.50,
+                      "icon": "assets/icons/aws_icon.png"
                     },
+                    {
+                      "name": "Azure Portal • Azure Functions • Microservices • Resource Management",
+                      "level": 0.50,
+                      "icon": "assets/icons/azure_icon.png"
+                    }
                   ],
                 ),
               ],
@@ -156,30 +151,32 @@ class SkillsSection extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.grey.shade300),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // CATEGORY TITLE
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // CATEGORY TITLE
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
             ),
-          ),
 
-          const SizedBox(height: 18),
+            const SizedBox(height: 18),
 
-          // SKILL LIST
-          ...skills.map((skill) => Padding(
-            padding: const EdgeInsets.only(bottom: 20),
-            child: _skillWithProgress(
-              skill['name'],
-              skill['level'],
-              skill['icon'],
-            ),
-          )),
-        ],
+            // SKILL LIST
+            ...skills.map((skill) => Padding(
+              padding: const EdgeInsets.only(bottom: 20),
+              child: _skillWithProgress(
+                skill['name'],
+                skill['level'],
+                skill['icon'],
+              ),
+            )),
+          ],
+        ),
       ),
     );
   }
