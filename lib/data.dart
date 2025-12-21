@@ -2,7 +2,7 @@ final List<Map<String, dynamic>> mergedProjects = [
 
   {
     'title': 'Disctopia',
-    'logo': 'assets/projects/logos/disctopia_logo.png',
+    'logo': 'assets/projects/disctopia_logo.png',
     'desc': 'Music & Podcast streaming platform — Web + Mobile.',
     'tech': ['React Native', 'Next.js', 'Firebase'],
     'status': 'Live',
@@ -18,7 +18,7 @@ final List<Map<String, dynamic>> mergedProjects = [
 
   {
     'title': 'Kurudy',
-    'logo': 'assets/projects/logos/kurudy_logo.png',
+    'logo': 'assets/projects/kurudy_logo.png',
     'desc': 'Investment platform — Web + Mobile.',
     'tech': ['Next.js', 'React Native'],
     'status': 'Live',
@@ -34,7 +34,7 @@ final List<Map<String, dynamic>> mergedProjects = [
 
   {
     'title': 'Sendee',
-    'logo': 'assets/projects/logos/sendee_logo.png',
+    'logo': 'assets/projects/sendee_logo.png',
     'desc': 'Service marketplace app — Web + Mobile.',
     'tech': ['Flutter', 'Next.js', 'NodeJS'],
     'status': 'Live',
@@ -50,7 +50,7 @@ final List<Map<String, dynamic>> mergedProjects = [
 
   {
     'title': 'NandiFood ERP',
-    'logo': 'assets/projects/logos/nandifood_logo.png',
+    'logo': 'assets/projects/nandifood_logo.png',
     'desc': 'Enterprise ERP solution for inventory, production, and business operations.',
     'tech': ['Next.js', 'NodeJS'],
     'status': 'Live',
@@ -64,7 +64,7 @@ final List<Map<String, dynamic>> mergedProjects = [
 
   {
     'title': 'Wavve',
-    'logo': 'assets/projects/logos/wavve_logo.png',
+    'logo': 'assets/projects/wavve_logo.png',
     'desc': 'Podcast tools & audiogram creation suite.',
     'tech': ['Next.js', 'AWS', 'NestJS'],
     'status': 'Live',
@@ -78,7 +78,7 @@ final List<Map<String, dynamic>> mergedProjects = [
 
   {
     'title': 'Vehya',
-    'logo': 'assets/projects/logos/vehya_logo.png',
+    'logo': 'assets/projects/vehya_logo.png',
     'desc': 'EV installation & electrification marketplace.',
     'tech': ['Flutter', 'Firebase', 'AI Chat'],
     'status': 'Inactive',
@@ -91,7 +91,7 @@ final List<Map<String, dynamic>> mergedProjects = [
 
   {
     'title': 'AI Chef',
-    'logo': 'assets/projects/logos/aichef_logo.png',
+    'logo': 'assets/projects/aichef_logo.png',
     'desc': 'Ingredient → Recipe AI system (Web + Mobile).',
     'tech': ['Flutter', 'Firebase', 'NodeJS'],
     'status': 'Demo',
