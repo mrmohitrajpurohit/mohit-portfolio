@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               children: [
                 Container(key: homeKey, child: const HeroSection()),
-                Container(key: aboutKey, child: const AboutSection()),
+                // Container(key: aboutKey, child: const AboutSection()),
                 Container(key: projectsKey, child: const ProjectsSection()),
                 Container(key: aiKey, child: const AIWorkSection()),
                 Container(key: achievementKey, child: const CertificationsSection()),

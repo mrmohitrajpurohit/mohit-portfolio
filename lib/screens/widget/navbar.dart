@@ -53,11 +53,11 @@ class NavBar extends StatelessWidget {
           Row(
             children: [
               _navButton("Home", onHome),
-              _navButton("About", onAbout),
+              // _navButton("About", onAbout),
               _navButton("Projects", onProjects),
               _navButton("AI Work", onAIWork),
-              _navButton("Skills", onSkills),
               _navButton("Achievements", onAchievement),
+              _navButton("Skills", onSkills),
               _navButton("Contact", onContact),
             ],
           ),
