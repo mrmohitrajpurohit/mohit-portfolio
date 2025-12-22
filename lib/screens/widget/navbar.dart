@@ -41,7 +41,7 @@ class NavBar extends StatelessWidget {
         children: [
           // Left: Name
           const Text(
-            "Mohit",
+            "Mohit Rajpurohit",
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
