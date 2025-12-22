@@ -93,16 +93,14 @@ class _CertificateCardState extends State<_CertificateCard> {
 
   @override
   Widget build(BuildContext context) {
-    final isShowEye =
-        widget.item['isShowEye'] ?? true;
+    final bool isShowEye = widget.item['isShowEye'] ?? true;
+    final String? imagePath = widget.item['image'];
 
     return MouseRegion(
       onEnter: (_) => setState(() => hover = true),
       onExit: (_) => setState(() => hover = false),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
-        // transform:
-        // Matrix4.translationValues(0, hover ? -6 : 0, 0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
           boxShadow: [
@@ -110,35 +108,28 @@ class _CertificateCardState extends State<_CertificateCard> {
               color: Colors.black.withOpacity(0.08),
               blurRadius: 18,
               offset: const Offset(0, 8),
-            )
+            ),
           ],
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(18),
           child: Stack(
             children: [
-              // Background
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Positioned.fill(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(18),
-
-                      child: Image.asset(
-                                                widget.item['image']!,
-                                                fit: BoxFit.contain,
-                                                color: Colors.black.withOpacity(0.25),
-                                                colorBlendMode: BlendMode.darken,
-                                                errorBuilder: (_, __, ___) =>
-                            _fallbackBackground(),
-                                              ),
-                        ),
-                  ),
-                ),
+              // ================= BACKGROUND IMAGE =================
+              Positioned.fill(
+                child: imagePath != null && imagePath.isNotEmpty
+                    ? Image.asset(
+                  imagePath,
+                  fit: BoxFit.contain,
+                  color: Colors.black.withOpacity(0.25),
+                  colorBlendMode: BlendMode.darken,
+                  errorBuilder: (_, __, ___) =>
+                      _fallbackBackground(),
+                )
+                    : _fallbackBackground(),
               ),
 
-              // Blur overlay for readability
+              // ================= BLUR OVERLAY =================
               Positioned.fill(
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 2.5, sigmaY: 2.5),
@@ -148,21 +139,22 @@ class _CertificateCardState extends State<_CertificateCard> {
                 ),
               ),
 
-              // Content
+              // ================= CONTENT =================
               Padding(
                 padding: const EdgeInsets.all(22),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Eye icon
-                    if (isShowEye)
+                    if (isShowEye && imagePath != null && imagePath.isNotEmpty)
                       Align(
                         alignment: Alignment.topRight,
                         child: IconButton(
-                          icon: const Icon(Icons.visibility,
-                              color: Colors.white),
-                          onPressed: () =>
-                              _openPreview(widget.item['image']!),
+                          icon: const Icon(
+                            Icons.visibility,
+                            color: Colors.white,
+                          ),
+                          onPressed: () => _openPreview(imagePath),
                         ),
                       ),
 
@@ -201,7 +193,7 @@ class _CertificateCardState extends State<_CertificateCard> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Colors.grey.shade200,
+            Colors.grey.shade300,
             Colors.grey.shade100,
           ],
           begin: Alignment.topLeft,
