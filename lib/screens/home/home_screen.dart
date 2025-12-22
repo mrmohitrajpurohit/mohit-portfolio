@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:mohit_portfolio/screens/contact_info/contact_info.dart';
 import 'package:mohit_portfolio/screens/widget/sections/certifications_section.dart';
 
+import '../../core/widgets/footer_section.dart';
 import '../../view_model/home_view_model.dart';
 import '../hero/hero.dart';
 import '../widget/navbar.dart';
-import '../widget/sections/about_section.dart';
 import '../widget/sections/aiwork_section.dart';
-import '../widget/sections/contact_section.dart';
 import '../widget/sections/projects_section.dart';
 import '../widget/sections/skills_section.dart';
 
@@ -20,6 +19,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
+
+  /// 🔁 FOOTER MODE SWITCH
+  /// true  -> Sticky footer (always visible)
+  /// false -> Footer appears at end of scroll
+  final bool isStickyFooterEnabled = false;
 
   // SECTION KEYS
   final homeKey = GlobalKey();
@@ -43,23 +47,36 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // Scrollable main page
-          SingleChildScrollView(
-            controller: _scrollController,
-            child: Column(
-              children: [
-                Container(key: homeKey, child: const HeroSection()),
-                // Container(key: aboutKey, child: const AboutSection()),
-                Container(key: projectsKey, child: const ProjectsSection()),
-                Container(key: aiKey, child: const AIWorkSection()),
-                Container(key: achievementKey, child: const CertificationsSection()),
-                Container(key: skillsKey, child: const SkillsSection()),
-                Container(key: contactKey, child: ContactInfo(model: HomeViewModel()) ),
-              ],
+          // ================= MAIN SCROLL CONTENT =================
+          Padding(
+            // Leave space when sticky footer is enabled
+            padding: EdgeInsets.only(
+              bottom: isStickyFooterEnabled ? 80 : 0,
+            ),
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              child: Column(
+                children: [
+                  Container(key: homeKey, child: const HeroSection()),
+                  Container(key: projectsKey, child: const ProjectsSection()),
+                  Container(key: aiKey, child: const AIWorkSection()),
+                  Container(
+                      key: achievementKey,
+                      child: const CertificationsSection()),
+                  Container(key: skillsKey, child: const SkillsSection()),
+                  Container(
+                    key: contactKey,
+                    child: ContactInfo(model: HomeViewModel()),
+                  ),
+
+                  // Normal footer when sticky is OFF
+                  if (!isStickyFooterEnabled) const FooterSection(),
+                ],
+              ),
             ),
           ),
 
-          // Floating Navbar
+          // ================= FLOATING NAVBAR =================
           Positioned(
             top: 0,
             left: 0,
@@ -74,6 +91,15 @@ class _HomeScreenState extends State<HomeScreen> {
               onContact: () => scrollTo(contactKey),
             ),
           ),
+
+          // ================= STICKY FOOTER =================
+          if (isStickyFooterEnabled)
+            const Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: FooterSection(isSticky: true),
+            ),
         ],
       ),
     );
