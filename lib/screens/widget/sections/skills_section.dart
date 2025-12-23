@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 
 class SkillsSection extends StatelessWidget {
@@ -6,15 +5,21 @@ class SkillsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final bool isMobile = width < 700;
+
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 100),
+      padding: EdgeInsets.symmetric(
+        horizontal: isMobile ? 16 : 60,
+        vertical: isMobile ? 60 : 100,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text(
+          Text(
             "Skills & Technologies",
             style: TextStyle(
-              fontSize: 34,
+              fontSize: isMobile ? 24 : 34,
               fontWeight: FontWeight.bold,
               color: Colors.black,
               letterSpacing: 0.4,
@@ -23,20 +28,20 @@ class SkillsSection extends StatelessWidget {
 
           const SizedBox(height: 14),
 
-          const SizedBox(
-            width: 820,
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 820),
             child: Text(
               "Technologies, frameworks, and platforms I’ve worked with to build scalable mobile, web, and AI-driven systems.",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 17,
+                fontSize: isMobile ? 14 : 17,
                 height: 1.6,
                 color: Colors.black87,
               ),
             ),
           ),
 
-          const SizedBox(height: 70),
+          SizedBox(height: isMobile ? 40 : 70),
 
           LayoutBuilder(builder: (context, constraints) {
             int columns = constraints.maxWidth > 1100
@@ -48,9 +53,9 @@ class SkillsSection extends StatelessWidget {
             return GridView.count(
               shrinkWrap: true,
               crossAxisCount: columns,
-              crossAxisSpacing: 40,
-              mainAxisSpacing: 40,
-              childAspectRatio: 1.15,
+              crossAxisSpacing: isMobile ? 20 : 40,
+              mainAxisSpacing: isMobile ? 20 : 40,
+              childAspectRatio: columns == 1 ? 1.05 : 1.15,
               physics: const NeverScrollableScrollPhysics(),
               children: [
                 _skillCategory("Mobile Development", [
@@ -137,16 +142,15 @@ class SkillsSection extends StatelessWidget {
   Widget _skillCategory(String title, List<Map<String, dynamic>> skills) {
     return _HoverLift(
       child: Container(
-
-        decoration:  BoxDecoration(
+        decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(22),
           border: Border.all(
             color: Colors.white.withOpacity(0.18),
           ),
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             colors: [
-              Color(0xFF0F172A), // dark slate
-              Color(0xFF020617), // near black
+              Color(0xFF0F172A),
+              Color(0xFF020617),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -154,7 +158,6 @@ class SkillsSection extends StatelessWidget {
         ),
         child: Container(
           padding: const EdgeInsets.all(28),
-
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
@@ -162,7 +165,6 @@ class SkillsSection extends StatelessWidget {
                 Colors.white.withOpacity(0.04),
               ],
             ),
-
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -192,23 +194,23 @@ class SkillsSection extends StatelessWidget {
               const SizedBox(height: 26),
               Expanded(
                 child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
                   child: Column(
-                    children: [
-                      ...skills.map(
-                            (skill) => Padding(
-                          padding: const EdgeInsets.only(bottom: 22),
-                          child: _skillRow(
-                            skill['name'],
-                            skill['level'],
-                            skill['icon'],
-                          ),
+                    children: skills
+                        .map(
+                          (skill) => Padding(
+                        padding: const EdgeInsets.only(bottom: 22),
+                        child: _skillRow(
+                          skill['name'],
+                          skill['level'],
+                          skill['icon'],
                         ),
                       ),
-                    ],
+                    )
+                        .toList(),
                   ),
                 ),
               )
-
             ],
           ),
         ),
@@ -220,12 +222,9 @@ class SkillsSection extends StatelessWidget {
   Widget _skillRow(String name, double percent, String iconPath) {
     return Row(
       children: [
-        Container(
+        SizedBox(
           height: 46,
           width: 46,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(40)),
-          ),
           child: Image.asset(
             iconPath,
             errorBuilder: (_, __, ___) =>
@@ -291,34 +290,6 @@ class SkillsSection extends StatelessWidget {
       ],
     );
   }
-
-  // ================= GLOW BLOBS =================
-  Widget _glowBlob(
-      {double? top,
-        double? left,
-        double? right,
-        double? bottom,
-        required Color color}) {
-    return Positioned(
-      top: top,
-      left: left,
-      right: right,
-      bottom: bottom,
-      child: Container(
-        width: 260,
-        height: 260,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          gradient: RadialGradient(
-            colors: [
-              color.withOpacity(0.45),
-              Colors.transparent,
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 }
 
 // ================= HOVER LIFT =================
@@ -341,7 +312,8 @@ class _HoverLiftState extends State<_HoverLift> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         transform:
-        Matrix4.translationValues(0, hover ? -12 : 0, 0)..scale(hover ? 1.03 : 1),
+        Matrix4.translationValues(0, hover ? -12 : 0, 0)
+          ..scale(hover ? 1.03 : 1),
         child: widget.child,
       ),
     );
