@@ -108,7 +108,7 @@ class FooterSection extends StatelessWidget {
 
         // RIGHT: RESUME
         TextButton.icon(
-          onPressed: () => _open('assets/files/Mohit_Resume.pdf'),
+          onPressed: () => _open('https://raw.githubusercontent.com/mrmohitrajpurohit/mohit-portfolio/main/Mohit%20Resume%20Oct%2002%2C%202025.pdf'),
           icon: const Icon(Icons.download, size: 16),
           label: const Text("Resume"),
         ),
@@ -134,7 +134,7 @@ class FooterSection extends StatelessWidget {
             IconButton(
               tooltip: "Download Resume",
               icon: const Icon(Icons.download),
-              onPressed: () => _open('assets/files/Mohit_Resume.pdf'),
+              onPressed: () => _open('https://raw.githubusercontent.com/mrmohitrajpurohit/mohit-portfolio/main/Mohit%20Resume%20Oct%2002%2C%202025.pdf'),
             ),
           ],
         ),
