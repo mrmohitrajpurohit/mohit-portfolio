@@ -6,41 +6,48 @@ class CertificationsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final bool isMobile = width < 700;
+
     final List<Map<String, dynamic>> allItems = [
       ...certificationsData,
       ...achievementsData,
     ];
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 90),
+      padding: EdgeInsets.symmetric(
+        horizontal: isMobile ? 16 : 60,
+        vertical: isMobile ? 60 : 90,
+      ),
       color: Colors.white,
       child: Column(
         children: [
-          const Text(
+          Text(
             "Certifications & Achievements",
+            textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 30,
+              fontSize: isMobile ? 22 : 30,
               fontWeight: FontWeight.bold,
               letterSpacing: 0.3,
             ),
           ),
 
-          const SizedBox(height: 14),
+          const SizedBox(height: 12),
 
-          const SizedBox(
-            width: 760,
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 760),
             child: Text(
               "Verified certifications, recognitions, and milestones that reflect my learning journey and professional growth.",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: isMobile ? 14 : 16,
                 height: 1.6,
                 color: Colors.black87,
               ),
             ),
           ),
 
-          const SizedBox(height: 60),
+          SizedBox(height: isMobile ? 36 : 60),
 
           LayoutBuilder(builder: (context, constraints) {
             int count = constraints.maxWidth > 1100
@@ -54,9 +61,9 @@ class CertificationsSection extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: count,
-                crossAxisSpacing: 28,
-                mainAxisSpacing: 28,
-                childAspectRatio: 1.3,
+                crossAxisSpacing: isMobile ? 16 : 28,
+                mainAxisSpacing: isMobile ? 16 : 28,
+                childAspectRatio: count == 1 ? 1.05 : 1.3,
               ),
               itemCount: allItems.length,
               itemBuilder: (_, i) {
@@ -93,6 +100,7 @@ class _CertificateCardState extends State<_CertificateCard> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isMobile = MediaQuery.of(context).size.width < 700;
     final bool isShowEye = widget.item['isShowEye'] ?? true;
     final String? imagePath = widget.item['image'];
 
@@ -115,12 +123,12 @@ class _CertificateCardState extends State<_CertificateCard> {
           borderRadius: BorderRadius.circular(18),
           child: Stack(
             children: [
-              // ================= BACKGROUND IMAGE =================
+              // ================= BACKGROUND =================
               Positioned.fill(
                 child: imagePath != null && imagePath.isNotEmpty
                     ? Image.asset(
                   imagePath,
-                  fit: BoxFit.contain,
+                  fit: BoxFit.cover,
                   color: Colors.black.withOpacity(0.25),
                   colorBlendMode: BlendMode.darken,
                   errorBuilder: (_, __, ___) =>
@@ -129,7 +137,7 @@ class _CertificateCardState extends State<_CertificateCard> {
                     : _fallbackBackground(),
               ),
 
-              // ================= BLUR OVERLAY =================
+              // ================= BLUR =================
               Positioned.fill(
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 2.5, sigmaY: 2.5),
@@ -141,12 +149,13 @@ class _CertificateCardState extends State<_CertificateCard> {
 
               // ================= CONTENT =================
               Padding(
-                padding: const EdgeInsets.all(22),
+                padding: EdgeInsets.all(isMobile ? 16 : 22),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Eye icon
-                    if (isShowEye && imagePath != null && imagePath.isNotEmpty)
+                    if (isShowEye &&
+                        imagePath != null &&
+                        imagePath.isNotEmpty)
                       Align(
                         alignment: Alignment.topRight,
                         child: IconButton(
@@ -162,8 +171,8 @@ class _CertificateCardState extends State<_CertificateCard> {
 
                     Text(
                       widget.item['title'] ?? "",
-                      style: const TextStyle(
-                        fontSize: 17,
+                      style: TextStyle(
+                        fontSize: isMobile ? 15 : 17,
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
                       ),
@@ -173,8 +182,8 @@ class _CertificateCardState extends State<_CertificateCard> {
 
                     Text(
                       widget.item['subtitle'] ?? "",
-                      style: const TextStyle(
-                        fontSize: 14,
+                      style: TextStyle(
+                        fontSize: isMobile ? 13 : 14,
                         color: Colors.white70,
                       ),
                     ),
@@ -241,8 +250,7 @@ class _ImagePreviewDialog extends StatelessWidget {
   }
 }
 
-
-// ---------- CERTIFICATIONS DATA ----------
+// ---------- DATA ----------
 final List<Map<String, dynamic>> certificationsData = [
   {
     "title": "Oracle Certified Foundation Associate",
@@ -281,7 +289,6 @@ final List<Map<String, dynamic>> certificationsData = [
   },
 ];
 
-// ---------- ACHIEVEMENTS DATA ----------
 final List<Map<String, dynamic>> achievementsData = [
   {
     "title": "5 Stars in Java",
@@ -301,4 +308,3 @@ final List<Map<String, dynamic>> achievementsData = [
     "image": "assets/certifications/internal_hackathon.png"
   },
 ];
-
