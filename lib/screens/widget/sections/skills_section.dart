@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/constants/app_constants.dart';
+
 class SkillsSection extends StatelessWidget {
   const SkillsSection({super.key});
 
@@ -62,72 +64,72 @@ class SkillsSection extends StatelessWidget {
                   {
                     "name": "Flutter",
                     "level": 0.95,
-                    "icon": "assets/icons/flutter_icon.png"
+                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/flutter_icon.png"
                   },
                   {
                     "name": "Android/Kotlin",
                     "level": 0.92,
-                    "icon": "assets/icons/kotlin_icon.png"
+                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/kotlin_icon.png"
                   },
                   {
                     "name": "React Native",
                     "level": 0.70,
-                    "icon": "assets/icons/reacts_icon.png"
+                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/reacts_icon.png"
                   },
                 ]),
                 _skillCategory("Web Development", [
                   {
                     "name": "Next.js",
                     "level": 0.75,
-                    "icon": "assets/icons/nextjs.png"
+                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/nextjs.png"
                   },
                   {
                     "name": "React.js",
                     "level": 0.72,
-                    "icon": "assets/icons/reacts_icon.png"
+                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/reacts_icon.png"
                   },
                   {
                     "name": "Flutter",
                     "level": 0.90,
-                    "icon": "assets/icons/flutter_icon.png"
+                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/flutter_icon.png"
                   },
                 ]),
                 _skillCategory("Backend • AI • DevOps", [
                   {
                     "name": "Python",
                     "level": 0.30,
-                    "icon": "assets/icons/python_icon.png"
+                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/python_icon.png"
                   },
                   {
                     "name": "FastAPI • LangChain",
                     "level": 0.30,
-                    "icon": "assets/icons/fastapi_icon.png"
+                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/fastapi_icon.png"
                   },
                   {
                     "name": "Firebase",
                     "level": 0.78,
-                    "icon": "assets/icons/firebase_icon.png"
+                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/firebase_icon.png"
                   },
                   {
                     "name": "NodeJS",
                     "level": 0.20,
-                    "icon": "assets/icons/nodejs_icon.png"
+                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/nodejs_icon.png"
                   },
                   {
                     "name": ".NET • NestJS",
                     "level": 0.30,
-                    "icon": "assets/icons/nestjs_icon.png"
+                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/nestjs_icon.png"
                   },
                   {
                     "name": "AWS • Lambdas • Microservices",
                     "level": 0.50,
-                    "icon": "assets/icons/aws_icon.png"
+                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/aws_icon.png"
                   },
                   {
                     "name":
                     "Azure Portal • Azure Functions • Microservices",
                     "level": 0.50,
-                    "icon": "assets/icons/azure_icon.png"
+                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/azure_icon.png"
                   },
                 ]),
               ],
@@ -225,7 +227,7 @@ class SkillsSection extends StatelessWidget {
         SizedBox(
           height: 46,
           width: 46,
-          child: Image.asset(
+          child: Image.network(
             iconPath,
             errorBuilder: (_, __, ___) =>
             const Icon(Icons.code, color: Colors.white),

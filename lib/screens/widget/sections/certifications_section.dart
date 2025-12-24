@@ -1,6 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
+import '../../../core/constants/app_constants.dart';
+
 class CertificationsSection extends StatelessWidget {
   const CertificationsSection({super.key});
 
@@ -126,7 +128,7 @@ class _CertificateCardState extends State<_CertificateCard> {
               // ================= BACKGROUND =================
               Positioned.fill(
                 child: imagePath != null && imagePath.isNotEmpty
-                    ? Image.asset(
+                    ? Image.network(
                   imagePath,
                   fit: BoxFit.cover,
                   color: Colors.black.withOpacity(0.25),
@@ -237,7 +239,7 @@ class _ImagePreviewDialog extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.circular(18),
             ),
-            child: Image.asset(
+            child: Image.network(
               imagePath,
               fit: BoxFit.contain,
               errorBuilder: (_, __, ___) =>
@@ -255,37 +257,37 @@ final List<Map<String, dynamic>> certificationsData = [
   {
     "title": "Oracle Certified Foundation Associate",
     "subtitle": "Oracle • Jan 2022",
-    "image": "assets/certifications/oracle_foundation.png"
+    "image": "${AppConstants().configConstants.imageBaseUrl}assets/certifications/oracle_foundation.png"
   },
   {
     "title": "Android Webinar Participation",
     "subtitle": "May 2020",
-    "image": "assets/certifications/android_webinar.png"
+    "image": "${AppConstants().configConstants.imageBaseUrl}assets/certifications/android_webinar.png"
   },
   {
     "title": "Internal Hackathon Evaluation",
     "subtitle": "SSIU • March 2022",
-    "image": "assets/certifications/hackathon_eval.png"
+    "image": "${AppConstants().configConstants.imageBaseUrl}assets/certifications/hackathon_eval.png"
   },
   {
     "title": "AWS Billing & Cost Management",
     "subtitle": "AWS • Apr 2022",
-    "image": "assets/certifications/aws_billing.png"
+    "image": "${AppConstants().configConstants.imageBaseUrl}assets/certifications/aws_billing.png"
   },
   {
     "title": "Java Programming Certificate",
     "subtitle": "Great Learning • Oct 2021",
-    "image": "assets/certifications/java_great_learning.png"
+    "image": "${AppConstants().configConstants.imageBaseUrl}assets/certifications/java_great_learning.png"
   },
   {
     "title": "CodeChef Go Code Participation",
     "subtitle": "Feb 2022",
-    "image": "assets/certifications/codechef_go_code.png"
+    "image": "${AppConstants().configConstants.imageBaseUrl}assets/certifications/codechef_go_code.png"
   },
   {
     "title": "MSME Entrepreneurship Program",
     "subtitle": "Nov 2021",
-    "image": "assets/certifications/msme_program.png"
+    "image": "${AppConstants().configConstants.imageBaseUrl}assets/certifications/msme_program.png"
   },
 ];
 
@@ -293,18 +295,18 @@ final List<Map<String, dynamic>> achievementsData = [
   {
     "title": "5 Stars in Java",
     "subtitle": "HackerRank Competitive Programming",
-    "image": "assets/certifications/java_hackerrank_certi.png"
+    "image": "${AppConstants().configConstants.imageBaseUrl}assets/certifications/java_hackerrank_certi.png"
   },
   {
     "title": "Executive Member",
     "subtitle": "CodeChef SSIU Chapter",
     "isShowEye": false,
-    "image": "assets/certifications/executive_member.png"
+    "image": "${AppConstants().configConstants.imageBaseUrl}assets/certifications/executive_member.png"
   },
   {
     "title": "Evaluator — Internal Hackathon",
     "subtitle": "SSIU Gandhinagar",
     "isShowEye": false,
-    "image": "assets/certifications/internal_hackathon.png"
+    "image": "${AppConstants().configConstants.imageBaseUrl}assets/certifications/internal_hackathon.png"
   },
 ];

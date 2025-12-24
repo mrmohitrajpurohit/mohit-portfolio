@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../core/constants/app_constants.dart';
+
 class HomeViewModel with ChangeNotifier {
   bool isMenuOpen = false;
 
@@ -42,9 +44,9 @@ class HomeViewModel with ChangeNotifier {
           "I design intuitive and user-friendly interfaces for mobile apps. My process focuses on accessibility, visual hierarchy, and seamless user flow to ensure better engagement.",
       "tags": ["UI", "User flow", "App mockups", "Design systems", "+more"],
       "relevantImages": [
-        "assets/services_cards/ui_ux.jpg",
-        "assets/services_cards/ui_ux1.jpg",
-        "assets/services_cards/ui_ux2.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/services_cards/ui_ux.jpg",
+        "${AppConstants().configConstants.imageBaseUrl}assets/services_cards/ui_ux1.jpg",
+        "${AppConstants().configConstants.imageBaseUrl}assets/services_cards/ui_ux2.png",
       ],
       "icon": Icons.splitscreen
     },
@@ -60,9 +62,9 @@ class HomeViewModel with ChangeNotifier {
         "+more"
       ],
       "relevantImages": [
-        "assets/services_cards/app_development1.jpeg",
-        "assets/services_cards/app_devopment.jpeg",
-        "assets/services_cards/app_development3.png"
+        "${AppConstants().configConstants.imageBaseUrl}assets/services_cards/app_development1.jpeg",
+        "${AppConstants().configConstants.imageBaseUrl}assets/services_cards/app_devopment.jpeg",
+        "${AppConstants().configConstants.imageBaseUrl}assets/services_cards/app_development3.png"
       ],
       "icon": Icons.android
     },
@@ -78,9 +80,9 @@ class HomeViewModel with ChangeNotifier {
         "+more"
       ],
       "relevantImages": [
-        "assets/services_cards/flutter_api.jpg",
-        "assets/services_cards/flutter_api1.jpg",
-        "assets/services_cards/flutter_api2.jpg"
+        "${AppConstants().configConstants.imageBaseUrl}assets/services_cards/flutter_api.jpg",
+        "${AppConstants().configConstants.imageBaseUrl}assets/services_cards/flutter_api1.jpg",
+        "${AppConstants().configConstants.imageBaseUrl}assets/services_cards/flutter_api2.jpg"
       ],
       "icon": Icons.api_rounded
     }
@@ -93,10 +95,10 @@ class HomeViewModel with ChangeNotifier {
           "Deep Tech Stars is an AI-focused app designed to keep users updated on Machine Learning, NLP, Data Science, and other AI domains. It delivers curated content, including news, blogs, research papers, and career guidance. The app was built from scratch with features like dark/light mode, Branch.io for deep linking, and push notifications. These tools enhance user experience and ensure personalized, up-to-date learning.",
       "tags": ["Dart", "Flutter", "Firebase", "Branch.io", "Provider"],
       "relevantImages": [
-        "assets/projects/dts_thumbnail.png",
-        "assets/projects/dts_thumbnail.png",
-        "assets/projects/dts_thumbnail.png",
-        "assets/projects/dts_thumbnail.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/projects/dts_thumbnail.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/projects/dts_thumbnail.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/projects/dts_thumbnail.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/projects/dts_thumbnail.png",
       ],
       "icon": Icons.auto_awesome,
     },
@@ -113,10 +115,10 @@ class HomeViewModel with ChangeNotifier {
         "Riverpod"
       ],
       "relevantImages": [
-        "assets/projects/crewlair_thumbnail.png",
-        "assets/projects/crewlair_thumbnail.png",
-        "assets/projects/crewlair_thumbnail.png",
-        "assets/projects/crewlair_thumbnail.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/projects/crewlair_thumbnail.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/projects/crewlair_thumbnail.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/projects/crewlair_thumbnail.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/projects/crewlair_thumbnail.png",
       ],
       "icon": Icons.people_alt_rounded,
     },
@@ -126,10 +128,10 @@ class HomeViewModel with ChangeNotifier {
           "Contributing to the development of a product and service-based platform, focusing on building scalable and efficient solutions. Collaborating with cross-functional teams to deliver high-quality features and services for end-users. Implementing end-to-end features, from concept to deployment, ensuring a seamless user experience. Built for both mobile and web platforms.",
       "tags": ["Flutter", "Firebase", "Google Maps API", "Riverpod"],
       "relevantImages": [
-        "assets/projects/vehya_thumbnail.png",
-        "assets/projects/vehya_thumbnail.png",
-        "assets/projects/vehya_thumbnail.png",
-        "assets/projects/vehya_thumbnail.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/projects/vehya_thumbnail.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/projects/vehya_thumbnail.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/projects/vehya_thumbnail.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/projects/vehya_thumbnail.png",
       ],
       "icon": Icons.api_rounded,
     },
@@ -139,10 +141,10 @@ class HomeViewModel with ChangeNotifier {
           "Visa, Tourism & Citizenship Services Platform – Contributed to the design and development of a cross-platform React Native mobile application delivering end-to-end services across visa procurement, tour package curation, and citizenship consultation tailored for African destinations. Implemented secure document handling, user onboarding flows, real-time application tracking, and curated travel offerings, ensuring a seamless, accessible experience while collaborating closely with cross-functional teams to deliver high-quality, user-centric solutions.",
       "tags": ["React Native", "Firebase", "Redux"],
       "relevantImages": [
-        "assets/projects/kurudy_thumbnail.png",
-        "assets/projects/kurudy_thumbnail.png",
-        "assets/projects/kurudy_thumbnail.png",
-        "assets/projects/kurudy_thumbnail.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/projects/kurudy_thumbnail.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/projects/kurudy_thumbnail.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/projects/kurudy_thumbnail.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/projects/kurudy_thumbnail.png",
       ],
       "icon": Icons.flight_takeoff_rounded,
     }

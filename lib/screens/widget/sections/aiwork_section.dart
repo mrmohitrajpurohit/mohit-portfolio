@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/constants/app_constants.dart';
+
 class AIWorkSection extends StatelessWidget {
   const AIWorkSection({super.key});
 
@@ -88,11 +90,11 @@ class AIWorkSection extends StatelessWidget {
       "desc":
       "Predicate logic, dynamic flows, state-based reasoning and multi-condition AI responses.",
       "tech": ["FastAPI", "LangChain", "Predicates", "Python"],
-      "background": "assets/images/ai_bot_bg2.png",
+      "background": "${AppConstants().configConstants.imageBaseUrl}assets/images/ai_bot_bg2.png",
       "icons": [
-        "assets/icons/robot.png",
-        "assets/icons/logic.png",
-        "assets/icons/chat.jpg",
+        "${AppConstants().configConstants.imageBaseUrl}assets/icons/robot.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/icons/logic.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/icons/chat.jpg",
       ],
     },
     {
@@ -100,22 +102,22 @@ class AIWorkSection extends StatelessWidget {
       "desc":
       "Live voice ↔ API ↔ AI workflow enabling spoken intelligent responses.",
       "tech": ["Vapi AI", "Workflow", "Assistant"],
-      "background": "assets/images/vapi_bg.png",
+      "background": "${AppConstants().configConstants.imageBaseUrl}assets/images/vapi_bg.png",
       "icons": [
-        "assets/icons/mic.png",
-        "assets/icons/voice.png",
-        "assets/icons/api.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/icons/mic.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/icons/voice.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/icons/api.png",
       ],
     },
     {
       "title": "LangChain + FastAPI Backend",
       "desc": "Reasoning-enabled backend with structured prompt templates.",
       "tech": ["LangChain", "FastAPI", "Python"],
-      "background": "assets/images/langchain_bg.png",
+      "background": "${AppConstants().configConstants.imageBaseUrl}assets/images/langchain_bg.png",
       "icons": [
-        "assets/icons/langchain.png",
-        "assets/icons/template.png",
-        "assets/icons/brain.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/icons/langchain.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/icons/template.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/icons/brain.png",
       ],
     },
     {
@@ -123,11 +125,11 @@ class AIWorkSection extends StatelessWidget {
       "desc":
       "OCR for address extraction and structured text understanding.",
       "tech": ["MLKit", "Firebase", "Flutter"],
-      "background": "assets/images/mlkit_bg.png",
+      "background": "${AppConstants().configConstants.imageBaseUrl}assets/images/mlkit_bg.png",
       "icons": [
-        "assets/icons/ocr.png",
-        "assets/icons/text.png",
-        "assets/icons/camera.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/icons/ocr.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/icons/text.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/icons/camera.png",
       ],
     },
     {
@@ -135,10 +137,10 @@ class AIWorkSection extends StatelessWidget {
       "desc":
       "Counts humans in the camera frame using ARKit processing.",
       "tech": ["ARKit", "Flutter"],
-      "background": "assets/images/arkit_bg.png",
+      "background": "${AppConstants().configConstants.imageBaseUrl}assets/images/arkit_bg.png",
       "icons": [
-        "assets/icons/arkit.png",
-        "assets/icons/human.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/icons/arkit.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/icons/human.png",
       ],
     },
     {
@@ -146,10 +148,10 @@ class AIWorkSection extends StatelessWidget {
       "desc":
       "Advanced R&D: HuggingFace, model testing, prompt engineering.",
       "tech": ["Python", "HuggingFace", "R&D"],
-      "background": "assets/images/python_bg.png",
+      "background": "${AppConstants().configConstants.imageBaseUrl}assets/images/python_bg.png",
       "icons": [
-        "assets/icons/tensorflow.png",
-        "assets/icons/hf.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/icons/tensorflow.png",
+        "${AppConstants().configConstants.imageBaseUrl}assets/icons/hf.png",
       ],
     },
   ];
@@ -182,7 +184,7 @@ class AICard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         image: DecorationImage(
-          image: AssetImage(background),
+          image: NetworkImage(background),
           fit: BoxFit.cover,
           colorFilter: ColorFilter.mode(
             Colors.black.withOpacity(0.55),
@@ -226,7 +228,7 @@ class AICard extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 10),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(
+                  child: Image.network(
                     icon,
                     height: isMobile ? 44 : 60,
                     width: isMobile ? 44 : 60,

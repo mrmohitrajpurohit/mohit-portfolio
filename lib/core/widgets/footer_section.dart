@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+import '../constants/app_constants.dart';
+import '../services/remote_config_service.dart';
+
+final config = RemoteConfigService.instance.buildConfig;
+
 class FooterSection extends StatelessWidget {
   final bool isSticky;
 
@@ -88,11 +93,11 @@ class FooterSection extends StatelessWidget {
         Row(
           children: [
             _socialIcon(
-              iconPath: 'assets/icons/github_icon.png',
+              iconPath: '${AppConstants().configConstants.imageBaseUrl}assets/icons/github_icon.png',
               onTap: () => _open('https://github.com/mohit-01-code'),
             ),
             _socialIcon(
-              iconPath: 'assets/icons/linkdin_icon.png',
+              iconPath: '${AppConstants().configConstants.imageBaseUrl}assets/icons/linkdin_icon.png',
               onTap: () => _open(
                 'https://www.linkedin.com/in/mohit-rajpurohit-8b9ba41a3/',
               ),
@@ -146,18 +151,18 @@ class FooterSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _socialIcon(
-              iconPath: 'assets/icons/github_icon.png',
+              iconPath: '${AppConstants().configConstants.imageBaseUrl}assets/icons/github_icon.png',
               onTap: () => _open('https://github.com/mohit-01-code'),
             ),
             _socialIcon(
-              iconPath: 'assets/icons/linkdin_icon.png',
+              iconPath: '${AppConstants().configConstants.imageBaseUrl}assets/icons/linkdin_icon.png',
               onTap: () => _open(
                 'https://www.linkedin.com/in/mohit-rajpurohit-8b9ba41a3/',
               ),
             ),
             _socialIcon(
               iconPath:
-              'https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png',
+              '${AppConstants().configConstants.imageBaseUrl}assets/icons/Instagram_icon.png',
               onTap: () =>
                   _open('https://www.instagram.com/_mohit_rajguru/'),
             ),

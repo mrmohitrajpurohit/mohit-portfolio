@@ -176,8 +176,8 @@ class _ContactInfoState extends State<ContactInfo> {
                 borderRadius: BorderRadius.circular(25),
                 child: Container(
                     color: Colors.red,
-                    child: Image.asset(
-                      "assets/services_cards/app_development3.png",
+                    child: Image.network(
+                      "${AppConstants().configConstants.imageBaseUrl}assets/services_cards/app_development3.png",
                       fit: BoxFit.cover,
                       width: 100,
                       height: 100,

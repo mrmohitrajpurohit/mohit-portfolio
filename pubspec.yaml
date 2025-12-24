@@ -38,13 +38,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  assets:
-    - assets/certifications/
-    - assets/images/
-    - assets/services_cards/
-    - assets/projects/
-    - assets/icons/
-    - assets/files/
 
   # Optional: Add fonts section if using custom fonts manually (skip if using google_fonts)
   # fonts:

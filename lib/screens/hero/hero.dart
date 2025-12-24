@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/constants/app_constants.dart';
+
 class HeroSection extends StatefulWidget {
   const HeroSection({super.key});
 
@@ -42,8 +44,8 @@ class _HeroSectionState extends State<HeroSection> {
               child: Stack(
                 alignment: Alignment.bottomCenter,
                 children: [
-                  Image.asset(
-                    'assets/images/pf_profile.png',
+                  Image.network(
+                    '${AppConstants().configConstants.imageBaseUrl}assets/images/pf_profile.png',
                     height: 600,
                     fit: BoxFit.cover,
                   ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/constants/app_constants.dart';
+
 class HeroSection extends StatelessWidget {
   const HeroSection({super.key});
 
@@ -114,8 +116,8 @@ class HeroSection extends StatelessWidget {
           // RIGHT SECTION (Profile Photo)
           ClipRRect(
             borderRadius: BorderRadius.circular(18),
-            child: Image.asset(
-              "assets/images/hero_mohit.png",
+            child: Image.network(
+              "${AppConstants().configConstants.imageBaseUrl}assets/images/hero_mohit.png",
               height: 420,
               width: 420,
               fit: BoxFit.cover,

@@ -55,7 +55,7 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard> {
                       onPageChanged: (i, _) => setState(() => _index = i),
                     ),
                     items: List.generate(project['images'].length, (i) {
-                      return Image.asset(
+                      return Image.network(
                         project['images'][i],
                         fit: isMobile ? BoxFit.cover : BoxFit.contain,
                         width: double.infinity,
@@ -217,7 +217,7 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard> {
                 ],
               ),
               child: ClipOval(
-                child: Image.asset(
+                child: Image.network(
                   widget.data['logo'],
                   fit: BoxFit.cover,
                   errorBuilder: (_, __, ___) =>
