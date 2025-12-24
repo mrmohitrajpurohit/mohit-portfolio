@@ -42,9 +42,6 @@ final List<Map<String, dynamic>> mergedProjects = [
     'live': 'https://sendee.com/home',
     'images': [
       'assets/projects/sendee_thumbnail.png',
-      'assets/projects/web/sendee_web.png',
-      'assets/projects/sendee/screens/s1.png',
-      'assets/projects/sendee/screens/s2.png',
     ],
   },
 
@@ -82,11 +79,7 @@ final List<Map<String, dynamic>> mergedProjects = [
     'desc': 'EV installation & electrification marketplace.',
     'tech': ['Flutter', 'Firebase', 'AI Chat'],
     'status': 'Inactive',
-    'images': [
-      'assets/projects/vehya_app1.png',
-      'assets/projects/vehya_app2.png',
-      'assets/projects/vehya_app3.png',
-    ],
+    'images': [],
   },
 
   {
@@ -97,7 +90,6 @@ final List<Map<String, dynamic>> mergedProjects = [
     'status': 'Demo',
     'images': [
       'assets/projects/ai_chef_thumbnail.png',
-      'assets/projects/web/ai_chef_web.png',
     ],
   },
 ];
