@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_text_styles.dart';
+
 class ProjectCarouselCard extends StatefulWidget {
   final Map<String, dynamic> data;
 
@@ -25,6 +28,9 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard> {
     final width = MediaQuery.of(context).size.width;
     final bool isMobile = width < 700;
 
+    final colors = AppColors.of(context);
+    final textStyles = AppTextStyles.of(context);
+
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -32,10 +38,10 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard> {
           duration: const Duration(milliseconds: 250),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(18),
-            border: Border.all(color: Colors.grey.shade300),
+            border: Border.all(color: colors.projectCardBorder),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.06),
+                color: colors.projectCardShadow,
                 blurRadius: 16,
                 offset: const Offset(0, 6),
               )
@@ -60,10 +66,9 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard> {
                         fit: isMobile ? BoxFit.cover : BoxFit.contain,
                         width: double.infinity,
                         errorBuilder: (_, __, ___) => Container(
-                          color: Colors.grey.shade200,
+                          color: colors.projectImagePlaceholder,
                           child: const Center(
-                            child:
-                            Icon(Icons.image_not_supported, size: 50),
+                            child: Icon(Icons.image_not_supported, size: 50),
                           ),
                         ),
                       );
@@ -76,11 +81,7 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard> {
                   child: Container(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [
-                          Colors.black.withOpacity(0.55),
-                          Colors.black.withOpacity(0.25),
-                          Colors.black.withOpacity(0.6),
-                        ],
+                        colors: colors.projectOverlayGradient,
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                       ),
@@ -103,11 +104,7 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard> {
                         Text(
                           project['title'],
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: isMobile ? 18 : 22,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white,
-                          ),
+                          style: textStyles.projectCardTitle(isMobile),
                         ),
 
                         const SizedBox(height: 6),
@@ -117,10 +114,7 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard> {
                           textAlign: TextAlign.center,
                           maxLines: isMobile ? 4 : 3,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: isMobile ? 13 : 14,
-                            color: Colors.white70,
-                          ),
+                          style: textStyles.projectCardDesc(isMobile),
                         ),
 
                         const SizedBox(height: 10),
@@ -142,8 +136,8 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard> {
                               ),
                               child: Text(
                                 t,
-                                style: TextStyle(
-                                    fontSize: isMobile ? 11 : 12),
+                                style:
+                                textStyles.projectTechChip(isMobile),
                               ),
                             ),
                           )

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mohit_portfolio/core/theme/app_colors.dart';
+import 'package:mohit_portfolio/core/theme/app_text_styles.dart';
+import 'package:mohit_portfolio/core/theme/app_theme_mode.dart';
+import 'package:mohit_portfolio/main.dart';
 
 class NavBar extends StatefulWidget {
   final VoidCallback onHome;
@@ -46,57 +50,61 @@ class _NavBarState extends State<NavBar> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColors.of(context);
+    final textStyles = AppTextStyles.of(context);
+
     return LayoutBuilder(
       builder: (context, constraints) {
         final bool isMobile = constraints.maxWidth < 800;
 
-        return Container(
-          margin: EdgeInsets.symmetric(
-            horizontal: isMobile ? 12 : 20,
-            vertical: isMobile ? 10 : 20,
-          ),
-          padding: EdgeInsets.symmetric(
-            horizontal: isMobile ? 16 : 40,
-            vertical: isMobile ? 14 : 16,
-          ),
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.88),
-            borderRadius: BorderRadius.circular(14),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 12,
-                offset: Offset(0, 3),
+        return Stack(
+          clipBehavior: Clip.none,
+          children: [
+            // ================= MAIN NAVBAR =================
+            Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: isMobile ? 12 : 20,
+                vertical: isMobile ? 10 : 20,
               ),
-            ],
-          ),
-          child: isMobile ? _mobileNav() : _desktopNav(),
+              padding: EdgeInsets.symmetric(
+                horizontal: isMobile ? 16 : 40,
+                vertical: isMobile ? 14 : 16,
+              ),
+              decoration: BoxDecoration(
+                color: colors.navbarBackground,
+                borderRadius: BorderRadius.circular(14),
+                boxShadow: colors.navbarShadow,
+              ),
+              child:
+              isMobile ? _mobileNav(colors, textStyles) : _desktopNav(colors, textStyles),
+            ),
+
+            // ================= THEME TOGGLE =================
+            Positioned(
+              right: isMobile ? 12 : 20,
+              bottom: isMobile ? -14 : -16,
+              child: _ThemeToggle(colors: colors),
+            ),
+          ],
         );
       },
     );
   }
 
   // ================= DESKTOP NAV =================
-  Widget _desktopNav() {
+  Widget _desktopNav(AppColors colors, AppTextStyles textStyles) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
-          "Mohit Rajpurohit",
-          style: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1.2,
-          ),
-        ),
+        Text("Mohit Rajpurohit", style: textStyles.navTitle),
         Row(
           children: [
-            _navButton("Home", widget.onHome),
-            _navButton("Projects", widget.onProjects),
-            _navButton("AI Work", widget.onAIWork),
-            _navButton("Achievements", widget.onAchievement),
-            _navButton("Skills", widget.onSkills),
-            _navButton("Contact", widget.onContact),
+            _navButton("Home", widget.onHome, colors, textStyles),
+            _navButton("Projects", widget.onProjects, colors, textStyles),
+            _navButton("AI Work", widget.onAIWork, colors, textStyles),
+            _navButton("Achievements", widget.onAchievement, colors, textStyles),
+            _navButton("Skills", widget.onSkills, colors, textStyles),
+            _navButton("Contact", widget.onContact, colors, textStyles),
           ],
         ),
       ],
@@ -104,26 +112,17 @@ class _NavBarState extends State<NavBar> {
   }
 
   // ================= MOBILE NAV =================
-  Widget _mobileNav() {
+  Widget _mobileNav(AppColors colors, AppTextStyles textStyles) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Row 1: Name
-        const Align(
+        Align(
           alignment: Alignment.centerLeft,
-          child: Text(
-            "Mohit",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 1.1,
-            ),
-          ),
+          child: Text("Mohit", style: textStyles.navTitleMobile),
         ),
 
         const SizedBox(height: 12),
 
-        // Row 2: Swiper
         SizedBox(
           height: 36,
           child: PageView.builder(
@@ -152,18 +151,15 @@ class _NavBarState extends State<NavBar> {
                     );
                   },
                   child: Container(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 18, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 18, vertical: 6),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.black),
+                      border: Border.all(color: colors.navbarBorder),
                     ),
                     child: Text(
                       _items[index].label,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: textStyles.navItemMobile,
                     ),
                   ),
                 ),
@@ -176,18 +172,69 @@ class _NavBarState extends State<NavBar> {
   }
 
   // ================= SHARED BUTTON =================
-  Widget _navButton(String label, VoidCallback onTap) {
+  Widget _navButton(
+      String label,
+      VoidCallback onTap,
+      AppColors colors,
+      AppTextStyles textStyles,
+      ) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(6),
-        child: Text(
-          label,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-          ),
+        child: Text(label, style: textStyles.navItem),
+      ),
+    );
+  }
+}
+
+// ================= THEME TOGGLE =================
+class _ThemeToggle extends StatelessWidget {
+  final AppColors colors;
+
+  const _ThemeToggle({required this.colors});
+
+  void _toggleTheme() {
+    final current = themeController.mode;
+
+    if (current == AppThemeMode.system) {
+      themeController.setTheme(AppThemeMode.light);
+    } else if (current == AppThemeMode.light) {
+      themeController.setTheme(AppThemeMode.dark);
+    } else {
+      themeController.setTheme(AppThemeMode.system);
+    }
+  }
+
+  IconData _iconForMode(AppThemeMode mode) {
+    switch (mode) {
+      case AppThemeMode.light:
+        return Icons.light_mode;
+      case AppThemeMode.dark:
+        return Icons.dark_mode;
+      case AppThemeMode.system:
+      default:
+        return Icons.brightness_auto;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: _toggleTheme,
+      child: Container(
+        height: 38,
+        padding: const EdgeInsets.symmetric(horizontal: 14),
+        decoration: BoxDecoration(
+          color: colors.navbarBackground,
+          borderRadius: BorderRadius.circular(14),
+          boxShadow: colors.navbarShadow,
+        ),
+        child: Icon(
+          _iconForMode(themeController.mode),
+          size: 20,
+          color: colors.textPrimary,
         ),
       ),
     );

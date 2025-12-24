@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../constants/app_constants.dart';
 import '../services/remote_config_service.dart';
+import '../theme/app_colors.dart';
+import '../theme/app_text_styles.dart';
 
 final config = RemoteConfigService.instance.buildConfig;
 
@@ -20,6 +23,9 @@ class FooterSection extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final isMobile = width < 700;
 
+    final colors = AppColors.of(context);
+    final textStyles = AppTextStyles.of(context);
+
     return Container(
       height: isSticky ? (isMobile ? 60 : 72) : null,
       padding: EdgeInsets.symmetric(
@@ -27,9 +33,9 @@ class FooterSection extends StatelessWidget {
         vertical: isMobile ? 10 : 14,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colors.certSectionBackground,
         border: Border(
-          top: BorderSide(color: Colors.grey.shade300),
+          top: BorderSide(color: colors.projectCardBorder),
         ),
         boxShadow: isSticky
             ? [
@@ -45,16 +51,18 @@ class FooterSection extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           // ================= MAIN CONTENT =================
-          isMobile ? _mobileLayout() : _desktopLayout(),
+          isMobile
+              ? _mobileLayout(context)
+              : _desktopLayout(context),
 
-          // ================= COPYRIGHT (ONLY SCROLL MODE) =================
+          // ================= COPYRIGHT =================
           if (!isSticky) ...[
             const SizedBox(height: 10),
             Text(
               "© ${DateTime.now().year} Mohit • Built with Flutter Web",
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                 fontSize: 12,
-                color: Colors.grey.shade600,
+                color: colors.textSecondary,
               ),
             ),
           ],
@@ -64,45 +72,47 @@ class FooterSection extends StatelessWidget {
   }
 
   // ================= DESKTOP LAYOUT =================
-  Widget _desktopLayout() {
+  Widget _desktopLayout(BuildContext context) {
+    final colors = AppColors.of(context);
+    final textStyles = AppTextStyles.of(context);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        // LEFT: NAME
+        // LEFT
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
             Text(
               "Mohit",
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-              ),
+              style: textStyles.navTitleMobile,
             ),
             Text(
               "Software Developer",
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.black54,
-              ),
+              style: textStyles.certSectionDesc(true),
             ),
           ],
         ),
 
-        // CENTER: SOCIAL ICONS
+        // CENTER
         Row(
           children: [
             _socialIcon(
-              iconPath: '${AppConstants().configConstants.imageBaseUrl}assets/icons/github_icon.png',
+              context,
+              iconPath:
+              '${AppConstants().configConstants.imageBaseUrl}assets/icons/github_icon.png',
               onTap: () => _open('https://github.com/mohit-01-code'),
             ),
             _socialIcon(
-              iconPath: '${AppConstants().configConstants.imageBaseUrl}assets/icons/linkdin_icon.png',
+              context,
+              iconPath:
+              '${AppConstants().configConstants.imageBaseUrl}assets/icons/linkdin_icon.png',
               onTap: () => _open(
                 'https://www.linkedin.com/in/mohit-rajpurohit-8b9ba41a3/',
               ),
             ),
             _socialIcon(
+              context,
               iconPath:
               'https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png',
               onTap: () =>
@@ -111,56 +121,60 @@ class FooterSection extends StatelessWidget {
           ],
         ),
 
-        // RIGHT: RESUME
+        // RIGHT
         TextButton.icon(
-          onPressed: () => _open('https://raw.githubusercontent.com/mrmohitrajpurohit/mohit-portfolio/main/Mohit%20Resume%20Oct%2002%2C%202025.pdf'),
-          icon: const Icon(Icons.download, size: 16),
-          label: const Text("Resume"),
+          onPressed: () => _open(
+            'https://raw.githubusercontent.com/mrmohitrajpurohit/mohit-portfolio/main/Mohit%20Resume%20Oct%2002%2C%202025.pdf',
+          ),
+          icon: Icon(Icons.download, size: 16, color: colors.textPrimary),
+          label: Text(
+            "Resume",
+            style: textStyles.navItemMobile,
+          ),
         ),
       ],
     );
   }
 
   // ================= MOBILE LAYOUT =================
-  Widget _mobileLayout() {
+  Widget _mobileLayout(BuildContext context) {
+    final colors = AppColors.of(context);
+    final textStyles = AppTextStyles.of(context);
+
     return Column(
       children: [
-        // NAME + RESUME
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              "Mohit",
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
+            Text("Mohit", style: textStyles.navTitleMobile),
             IconButton(
-              tooltip: "Download Resume",
-              icon: const Icon(Icons.download),
-              onPressed: () => _open('https://raw.githubusercontent.com/mrmohitrajpurohit/mohit-portfolio/main/Mohit%20Resume%20Oct%2002%2C%202025.pdf'),
+              icon: Icon(Icons.download, color: colors.textPrimary),
+              onPressed: () => _open(
+                'https://raw.githubusercontent.com/mrmohitrajpurohit/mohit-portfolio/main/Mohit%20Resume%20Oct%2002%2C%202025.pdf',
+              ),
             ),
           ],
         ),
-
         const SizedBox(height: 6),
-
-        // SOCIAL ICONS
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _socialIcon(
-              iconPath: '${AppConstants().configConstants.imageBaseUrl}assets/icons/github_icon.png',
+              context,
+              iconPath:
+              '${AppConstants().configConstants.imageBaseUrl}assets/icons/github_icon.png',
               onTap: () => _open('https://github.com/mohit-01-code'),
             ),
             _socialIcon(
-              iconPath: '${AppConstants().configConstants.imageBaseUrl}assets/icons/linkdin_icon.png',
+              context,
+              iconPath:
+              '${AppConstants().configConstants.imageBaseUrl}assets/icons/linkdin_icon.png',
               onTap: () => _open(
                 'https://www.linkedin.com/in/mohit-rajpurohit-8b9ba41a3/',
               ),
             ),
             _socialIcon(
+              context,
               iconPath:
               '${AppConstants().configConstants.imageBaseUrl}assets/icons/Instagram_icon.png',
               onTap: () =>
@@ -173,10 +187,13 @@ class FooterSection extends StatelessWidget {
   }
 
   // ================= SOCIAL ICON =================
-  Widget _socialIcon({
-    required String iconPath,
-    required VoidCallback onTap,
-  }) {
+  Widget _socialIcon(
+      BuildContext context, {
+        required String iconPath,
+        required VoidCallback onTap,
+      }) {
+    final colors = AppColors.of(context);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6),
       child: InkWell(
@@ -186,17 +203,9 @@ class FooterSection extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(color: Colors.grey.shade300),
+            border: Border.all(color: colors.projectCardBorder),
           ),
-          child: iconPath.contains('http')
-              ? Image.network(
-            iconPath,
-            height: 18,
-            width: 18,
-            errorBuilder: (_, __, ___) =>
-            const Icon(Icons.link, size: 18),
-          )
-              : Image.asset(
+          child: Image.network(
             iconPath,
             height: 18,
             width: 18,

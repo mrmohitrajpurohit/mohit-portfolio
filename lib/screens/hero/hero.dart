@@ -2,6 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/constants/app_constants.dart';
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_text_styles.dart';
 
 class HeroSection extends StatefulWidget {
   const HeroSection({super.key});
@@ -25,12 +27,10 @@ class _HeroSectionState extends State<HeroSection> {
   }
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final colors = AppColors.of(context);
+    final textStyles = AppTextStyles.of(context);
+
     return Listener(
       onPointerSignal: _onPointerSignal,
       child: Container(
@@ -60,11 +60,11 @@ class _HeroSectionState extends State<HeroSection> {
                           stops: const [0.0, 0.1, 0.2, 0.4, 0.6, 1.0],
                           colors: [
                             Colors.transparent,
-                            Color(0xffF7F7F7).withOpacity(0.1),
-                            Color(0xffF7F7F7).withOpacity(0.2),
-                            Color(0xffF7F7F7).withOpacity(0.6),
-                            Color(0xffF7F7F7).withOpacity(0.8),
-                            Color(0xffF7F7F7),
+                            colors.heroGradientBase.withOpacity(0.1),
+                            colors.heroGradientBase.withOpacity(0.2),
+                            colors.heroGradientBase.withOpacity(0.6),
+                            colors.heroGradientBase.withOpacity(0.8),
+                            colors.heroGradientBase,
                           ],
                         ),
                       ),
@@ -74,22 +74,22 @@ class _HeroSectionState extends State<HeroSection> {
               ),
             ),
             const SizedBox(height: 32),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
               child: Text(
                 "Building intelligent, scalable mobile and web apps with modern technologies. "
                     "Experienced in Android Kotlin, Flutter, React Native, Next.js, FastAPI, and AI automation.",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                style: textStyles.heroTitle,
               ),
             ),
             const SizedBox(height: 20),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 60),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 60),
               child: Text(
                 "I work closely with teams to turn ideas into fast, responsive cross-platform software using modern tools and best practices.",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.black87),
+                style: textStyles.heroSubtitle,
               ),
             ),
           ],

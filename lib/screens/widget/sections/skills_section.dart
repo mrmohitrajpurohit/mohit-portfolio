@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/app_constants.dart';
+import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_text_styles.dart';
 
 class SkillsSection extends StatelessWidget {
   const SkillsSection({super.key});
@@ -10,7 +12,11 @@ class SkillsSection extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final bool isMobile = width < 700;
 
+    final colors = AppColors.of(context);
+    final textStyles = AppTextStyles.of(context);
+
     return Container(
+      color: colors.skillsSectionBackground,
       padding: EdgeInsets.symmetric(
         horizontal: isMobile ? 16 : 60,
         vertical: isMobile ? 60 : 100,
@@ -20,12 +26,7 @@ class SkillsSection extends StatelessWidget {
         children: [
           Text(
             "Skills & Technologies",
-            style: TextStyle(
-              fontSize: isMobile ? 24 : 34,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-              letterSpacing: 0.4,
-            ),
+            style: textStyles.skillsSectionTitle(isMobile),
           ),
 
           const SizedBox(height: 14),
@@ -35,11 +36,7 @@ class SkillsSection extends StatelessWidget {
             child: Text(
               "Technologies, frameworks, and platforms I’ve worked with to build scalable mobile, web, and AI-driven systems.",
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: isMobile ? 14 : 17,
-                height: 1.6,
-                color: Colors.black87,
-              ),
+              style: textStyles.skillsSectionDesc(isMobile),
             ),
           ),
 
@@ -60,78 +57,103 @@ class SkillsSection extends StatelessWidget {
               childAspectRatio: columns == 1 ? 1.05 : 1.15,
               physics: const NeverScrollableScrollPhysics(),
               children: [
-                _skillCategory("Mobile Development", [
-                  {
-                    "name": "Flutter",
-                    "level": 0.95,
-                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/flutter_icon.png"
-                  },
-                  {
-                    "name": "Android/Kotlin",
-                    "level": 0.92,
-                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/kotlin_icon.png"
-                  },
-                  {
-                    "name": "React Native",
-                    "level": 0.70,
-                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/reacts_icon.png"
-                  },
-                ]),
-                _skillCategory("Web Development", [
-                  {
-                    "name": "Next.js",
-                    "level": 0.75,
-                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/nextjs.png"
-                  },
-                  {
-                    "name": "React.js",
-                    "level": 0.72,
-                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/reacts_icon.png"
-                  },
-                  {
-                    "name": "Flutter",
-                    "level": 0.90,
-                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/flutter_icon.png"
-                  },
-                ]),
-                _skillCategory("Backend • AI • DevOps", [
-                  {
-                    "name": "Python",
-                    "level": 0.30,
-                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/python_icon.png"
-                  },
-                  {
-                    "name": "FastAPI • LangChain",
-                    "level": 0.30,
-                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/fastapi_icon.png"
-                  },
-                  {
-                    "name": "Firebase",
-                    "level": 0.78,
-                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/firebase_icon.png"
-                  },
-                  {
-                    "name": "NodeJS",
-                    "level": 0.20,
-                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/nodejs_icon.png"
-                  },
-                  {
-                    "name": ".NET • NestJS",
-                    "level": 0.30,
-                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/nestjs_icon.png"
-                  },
-                  {
-                    "name": "AWS • Lambdas • Microservices",
-                    "level": 0.50,
-                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/aws_icon.png"
-                  },
-                  {
-                    "name":
-                    "Azure Portal • Azure Functions • Microservices",
-                    "level": 0.50,
-                    "icon": "${AppConstants().configConstants.imageBaseUrl}assets/icons/azure_icon.png"
-                  },
-                ]),
+                _skillCategory(
+                  context,
+                  "Mobile Development",
+                  [
+                    {
+                      "name": "Flutter",
+                      "level": 0.95,
+                      "icon":
+                      "${AppConstants().configConstants.imageBaseUrl}assets/icons/flutter_icon.png"
+                    },
+                    {
+                      "name": "Android/Kotlin",
+                      "level": 0.92,
+                      "icon":
+                      "${AppConstants().configConstants.imageBaseUrl}assets/icons/kotlin_icon.png"
+                    },
+                    {
+                      "name": "React Native",
+                      "level": 0.70,
+                      "icon":
+                      "${AppConstants().configConstants.imageBaseUrl}assets/icons/reacts_icon.png"
+                    },
+                  ],
+                ),
+                _skillCategory(
+                  context,
+                  "Web Development",
+                  [
+                    {
+                      "name": "Next.js",
+                      "level": 0.75,
+                      "icon":
+                      "${AppConstants().configConstants.imageBaseUrl}assets/icons/nextjs.png"
+                    },
+                    {
+                      "name": "React.js",
+                      "level": 0.72,
+                      "icon":
+                      "${AppConstants().configConstants.imageBaseUrl}assets/icons/reacts_icon.png"
+                    },
+                    {
+                      "name": "Flutter",
+                      "level": 0.90,
+                      "icon":
+                      "${AppConstants().configConstants.imageBaseUrl}assets/icons/flutter_icon.png"
+                    },
+                  ],
+                ),
+                _skillCategory(
+                  context,
+                  "Backend • AI • DevOps",
+                  [
+                    {
+                      "name": "Python",
+                      "level": 0.30,
+                      "icon":
+                      "${AppConstants().configConstants.imageBaseUrl}assets/icons/python_icon.png"
+                    },
+                    {
+                      "name": "FastAPI • LangChain",
+                      "level": 0.30,
+                      "icon":
+                      "${AppConstants().configConstants.imageBaseUrl}assets/icons/fastapi_icon.png"
+                    },
+                    {
+                      "name": "Firebase",
+                      "level": 0.78,
+                      "icon":
+                      "${AppConstants().configConstants.imageBaseUrl}assets/icons/firebase_icon.png"
+                    },
+                    {
+                      "name": "NodeJS",
+                      "level": 0.20,
+                      "icon":
+                      "${AppConstants().configConstants.imageBaseUrl}assets/icons/nodejs_icon.png"
+                    },
+                    {
+                      "name": ".NET • NestJS",
+                      "level": 0.30,
+                      "icon":
+                      "${AppConstants().configConstants.imageBaseUrl}assets/icons/nestjs_icon.png"
+                    },
+                    {
+                      "name": "AWS • Lambdas • Microservices",
+                      "level": 0.50,
+                      "icon":
+                      "${AppConstants().configConstants.imageBaseUrl}assets/icons/aws_icon.png"
+                    },
+                    {
+                      "name":
+                      "Azure Portal • Azure Functions • Microservices",
+                      "level": 0.50,
+                      "icon":
+                      "${AppConstants().configConstants.imageBaseUrl}assets/icons/azure_icon.png"
+                    },
+                  ],
+                ),
               ],
             );
           }),
@@ -141,19 +163,21 @@ class SkillsSection extends StatelessWidget {
   }
 
   // ================= SKILL CATEGORY CARD =================
-  Widget _skillCategory(String title, List<Map<String, dynamic>> skills) {
+  Widget _skillCategory(
+      BuildContext context,
+      String title,
+      List<Map<String, dynamic>> skills,
+      ) {
+    final colors = AppColors.of(context);
+    final textStyles = AppTextStyles.of(context);
+
     return _HoverLift(
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(22),
-          border: Border.all(
-            color: Colors.white.withOpacity(0.18),
-          ),
-          gradient: const LinearGradient(
-            colors: [
-              Color(0xFF0F172A),
-              Color(0xFF020617),
-            ],
+          border: Border.all(color: colors.skillCardBorder),
+          gradient: LinearGradient(
+            colors: colors.skillCardBaseGradient,
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -162,38 +186,29 @@ class SkillsSection extends StatelessWidget {
           padding: const EdgeInsets.all(28),
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                Colors.white.withOpacity(0.12),
-                Colors.white.withOpacity(0.04),
-              ],
+              colors: colors.skillCardOverlayGradient,
             ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),
-              ),
+              Text(title, style: textStyles.skillCategoryTitle()),
+
               const SizedBox(height: 10),
+
               Container(
                 height: 4,
                 width: 55,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  gradient: const LinearGradient(
-                    colors: [
-                      Color(0xFF38BDF8),
-                      Color(0xFFA855F7),
-                    ],
+                  gradient: LinearGradient(
+                    colors: colors.skillProgressGradient,
                   ),
                 ),
               ),
+
               const SizedBox(height: 26),
+
               Expanded(
                 child: SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
@@ -201,8 +216,10 @@ class SkillsSection extends StatelessWidget {
                     children: skills
                         .map(
                           (skill) => Padding(
-                        padding: const EdgeInsets.only(bottom: 22),
+                        padding:
+                        const EdgeInsets.only(bottom: 22),
                         child: _skillRow(
+                          context,
                           skill['name'],
                           skill['level'],
                           skill['icon'],
@@ -212,7 +229,7 @@ class SkillsSection extends StatelessWidget {
                         .toList(),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -221,7 +238,15 @@ class SkillsSection extends StatelessWidget {
   }
 
   // ================= INDIVIDUAL SKILL =================
-  Widget _skillRow(String name, double percent, String iconPath) {
+  Widget _skillRow(
+      BuildContext context,
+      String name,
+      double percent,
+      String iconPath,
+      ) {
+    final colors = AppColors.of(context);
+    final textStyles = AppTextStyles.of(context);
+
     return Row(
       children: [
         SizedBox(
@@ -240,15 +265,10 @@ class SkillsSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                name,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 15,
-                ),
-              ),
+              Text(name, style: textStyles.skillName()),
+
               const SizedBox(height: 8),
+
               TweenAnimationBuilder<double>(
                 tween: Tween(begin: 0, end: percent),
                 duration: const Duration(milliseconds: 1400),
@@ -256,7 +276,7 @@ class SkillsSection extends StatelessWidget {
                 builder: (_, value, __) => Container(
                   height: 8,
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.15),
+                    color: colors.skillProgressBackground,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: FractionallySizedBox(
@@ -265,11 +285,8 @@ class SkillsSection extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        gradient: const LinearGradient(
-                          colors: [
-                            Color(0xFF38BDF8),
-                            Color(0xFFA855F7),
-                          ],
+                        gradient: LinearGradient(
+                          colors: colors.skillProgressGradient,
                         ),
                       ),
                     ),
@@ -284,10 +301,7 @@ class SkillsSection extends StatelessWidget {
 
         Text(
           "${(percent * 100).round()}%",
-          style: const TextStyle(
-            color: Colors.white70,
-            fontWeight: FontWeight.w600,
-          ),
+          style: textStyles.skillPercent(),
         ),
       ],
     );

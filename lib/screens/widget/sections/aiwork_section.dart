@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/app_constants.dart';
+import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_text_styles.dart';
 
 class AIWorkSection extends StatelessWidget {
   const AIWorkSection({super.key});
@@ -10,8 +12,11 @@ class AIWorkSection extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final bool isMobile = width < 700;
 
+    final colors = AppColors.of(context);
+    final textStyles = AppTextStyles.of(context);
+
     return Container(
-      color: Colors.grey.shade50,
+      color: colors.aiSectionBackground,
       padding: EdgeInsets.symmetric(
         horizontal: isMobile ? 16 : 60,
         vertical: isMobile ? 50 : 80,
@@ -22,11 +27,7 @@ class AIWorkSection extends StatelessWidget {
           Text(
             "AI Work — Intelligent Systems & Automation",
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: isMobile ? 22 : 28,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 0.2,
-            ),
+            style: textStyles.aiSectionTitle(isMobile),
           ),
 
           const SizedBox(height: 12),
@@ -38,11 +39,7 @@ class AIWorkSection extends StatelessWidget {
                   "voice assistants, reasoning-enabled backend APIs, OCR demos, "
                   "AR-powered experiences, and structured prompt engineering flows.",
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: isMobile ? 14 : 16,
-                height: 1.55,
-                color: Colors.black.withOpacity(0.80),
-              ),
+              style: textStyles.aiSectionDesc(isMobile),
             ),
           ),
 
@@ -90,7 +87,8 @@ class AIWorkSection extends StatelessWidget {
       "desc":
       "Predicate logic, dynamic flows, state-based reasoning and multi-condition AI responses.",
       "tech": ["FastAPI", "LangChain", "Predicates", "Python"],
-      "background": "${AppConstants().configConstants.imageBaseUrl}assets/images/ai_bot_bg2.png",
+      "background":
+      "${AppConstants().configConstants.imageBaseUrl}assets/images/ai_bot_bg2.png",
       "icons": [
         "${AppConstants().configConstants.imageBaseUrl}assets/icons/robot.png",
         "${AppConstants().configConstants.imageBaseUrl}assets/icons/logic.png",
@@ -102,7 +100,8 @@ class AIWorkSection extends StatelessWidget {
       "desc":
       "Live voice ↔ API ↔ AI workflow enabling spoken intelligent responses.",
       "tech": ["Vapi AI", "Workflow", "Assistant"],
-      "background": "${AppConstants().configConstants.imageBaseUrl}assets/images/vapi_bg.png",
+      "background":
+      "${AppConstants().configConstants.imageBaseUrl}assets/images/vapi_bg.png",
       "icons": [
         "${AppConstants().configConstants.imageBaseUrl}assets/icons/mic.png",
         "${AppConstants().configConstants.imageBaseUrl}assets/icons/voice.png",
@@ -113,7 +112,8 @@ class AIWorkSection extends StatelessWidget {
       "title": "LangChain + FastAPI Backend",
       "desc": "Reasoning-enabled backend with structured prompt templates.",
       "tech": ["LangChain", "FastAPI", "Python"],
-      "background": "${AppConstants().configConstants.imageBaseUrl}assets/images/langchain_bg.png",
+      "background":
+      "${AppConstants().configConstants.imageBaseUrl}assets/images/langchain_bg.png",
       "icons": [
         "${AppConstants().configConstants.imageBaseUrl}assets/icons/langchain.png",
         "${AppConstants().configConstants.imageBaseUrl}assets/icons/template.png",
@@ -125,7 +125,8 @@ class AIWorkSection extends StatelessWidget {
       "desc":
       "OCR for address extraction and structured text understanding.",
       "tech": ["MLKit", "Firebase", "Flutter"],
-      "background": "${AppConstants().configConstants.imageBaseUrl}assets/images/mlkit_bg.png",
+      "background":
+      "${AppConstants().configConstants.imageBaseUrl}assets/images/mlkit_bg.png",
       "icons": [
         "${AppConstants().configConstants.imageBaseUrl}assets/icons/ocr.png",
         "${AppConstants().configConstants.imageBaseUrl}assets/icons/text.png",
@@ -137,7 +138,8 @@ class AIWorkSection extends StatelessWidget {
       "desc":
       "Counts humans in the camera frame using ARKit processing.",
       "tech": ["ARKit", "Flutter"],
-      "background": "${AppConstants().configConstants.imageBaseUrl}assets/images/arkit_bg.png",
+      "background":
+      "${AppConstants().configConstants.imageBaseUrl}assets/images/arkit_bg.png",
       "icons": [
         "${AppConstants().configConstants.imageBaseUrl}assets/icons/arkit.png",
         "${AppConstants().configConstants.imageBaseUrl}assets/icons/human.png",
@@ -148,7 +150,8 @@ class AIWorkSection extends StatelessWidget {
       "desc":
       "Advanced R&D: HuggingFace, model testing, prompt engineering.",
       "tech": ["Python", "HuggingFace", "R&D"],
-      "background": "${AppConstants().configConstants.imageBaseUrl}assets/images/python_bg.png",
+      "background":
+      "${AppConstants().configConstants.imageBaseUrl}assets/images/python_bg.png",
       "icons": [
         "${AppConstants().configConstants.imageBaseUrl}assets/icons/tensorflow.png",
         "${AppConstants().configConstants.imageBaseUrl}assets/icons/hf.png",
@@ -179,6 +182,9 @@ class AICard extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final bool isMobile = width < 700;
 
+    final colors = AppColors.of(context);
+    final textStyles = AppTextStyles.of(context);
+
     return Container(
       padding: EdgeInsets.all(isMobile ? 14 : 18),
       decoration: BoxDecoration(
@@ -187,7 +193,7 @@ class AICard extends StatelessWidget {
           image: NetworkImage(background),
           fit: BoxFit.cover,
           colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.55),
+            colors.aiCardOverlay,
             BlendMode.darken,
           ),
         ),
@@ -195,33 +201,19 @@ class AICard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // TITLE
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: isMobile ? 16 : 18,
-              fontWeight: FontWeight.w700,
-              color: Colors.white,
-            ),
-          ),
+          Text(title, style: textStyles.aiCardTitle(isMobile)),
 
           const SizedBox(height: 8),
 
-          // DESCRIPTION
           Text(
             desc,
             maxLines: isMobile ? 4 : 3,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontSize: isMobile ? 13 : 14,
-              height: 1.4,
-              color: Colors.white.withOpacity(0.9),
-            ),
+            style: textStyles.aiCardDesc(isMobile),
           ),
 
           const Spacer(),
 
-          // ICONS
           Row(
             children: icons.map((icon) {
               return Padding(
@@ -236,7 +228,7 @@ class AICard extends StatelessWidget {
                     errorBuilder: (_, __, ___) => Container(
                       height: isMobile ? 44 : 60,
                       width: isMobile ? 44 : 60,
-                      color: Colors.white24,
+                      color: colors.aiIconPlaceholder,
                     ),
                   ),
                 ),
@@ -246,24 +238,16 @@ class AICard extends StatelessWidget {
 
           SizedBox(height: isMobile ? 12 : 16),
 
-          // TECH TAGS
           Wrap(
             spacing: 6,
             runSpacing: 6,
             children: tech.map((t) {
               return Chip(
-                label: Text(
-                  t,
-                  style: TextStyle(
-                    fontSize: isMobile ? 11 : 12,
-                    color: Colors.white,
-                  ),
-                ),
-                backgroundColor: Colors.black,
+                label: Text(t, style: textStyles.aiChipText(isMobile)),
+                backgroundColor: colors.aiChipBackground,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
-                  side:
-                  BorderSide(color: Colors.white.withOpacity(0.25)),
+                  side: BorderSide(color: colors.aiChipBorder),
                 ),
               );
             }).toList(),
