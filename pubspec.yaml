@@ -20,6 +20,7 @@ dependencies:
 
   # Image Handling
   cached_network_image: ^3.3.1
+  carousel_slider: ^5.1.1
 
   # Icon Packs
   cupertino_icons: ^1.0.8
@@ -37,9 +38,12 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/certifications/
     - assets/images/
     - assets/services_cards/
     - assets/projects/
+    - assets/icons/
+    - assets/files/
 
   # Optional: Add fonts section if using custom fonts manually (skip if using google_fonts)
   # fonts:

@@ -36,7 +36,7 @@ class _ContactInfoState extends State<ContactInfo> {
 
           return Container(
             margin: EdgeInsets.symmetric(
-                horizontal: isMobile ? 50 : spacing * 10, vertical: spacing),
+                horizontal: isMobile ? 12 : spacing * 10, vertical: spacing),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

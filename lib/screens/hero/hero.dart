@@ -75,7 +75,8 @@ class _HeroSectionState extends State<HeroSection> {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: Text(
-                "I build beautiful mobile apps with Flutter and focus on clean, scalable UI/UX.",
+                "Building intelligent, scalable mobile and web apps with modern technologies. "
+                    "Experienced in Android Kotlin, Flutter, React Native, Next.js, FastAPI, and AI automation.",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
@@ -84,7 +85,7 @@ class _HeroSectionState extends State<HeroSection> {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 60),
               child: Text(
-                "I work closely with teams to turn ideas into fast, responsive cross-platform apps using modern tools and best practices.",
+                "I work closely with teams to turn ideas into fast, responsive cross-platform software using modern tools and best practices.",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 16, color: Colors.black87),
               ),
