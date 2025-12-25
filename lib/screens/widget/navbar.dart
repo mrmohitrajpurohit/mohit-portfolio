@@ -72,18 +72,19 @@ class _NavBarState extends State<NavBar> {
               ),
               decoration: BoxDecoration(
                 color: colors.navbarBackground,
-                borderRadius: BorderRadius.circular(14),
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(14), topRight: Radius.circular(14), bottomLeft: Radius.circular(14)),
                 boxShadow: colors.navbarShadow,
               ),
-              child:
-              isMobile ? _mobileNav(colors, textStyles) : _desktopNav(colors, textStyles),
+              child: isMobile
+                  ? _mobileNav(colors, textStyles)
+                  : _desktopNav(colors, textStyles),
             ),
 
             // ================= THEME TOGGLE =================
             Positioned(
               right: isMobile ? 12 : 20,
-              bottom: isMobile ? -14 : -16,
-              child: _ThemeToggle(colors: colors),
+              bottom: isMobile ? -16 : -18,
+              child: ThemeModeToggle(colors: colors),
             ),
           ],
         );
@@ -99,12 +100,12 @@ class _NavBarState extends State<NavBar> {
         Text("Mohit Rajpurohit", style: textStyles.navTitle),
         Row(
           children: [
-            _navButton("Home", widget.onHome, colors, textStyles),
-            _navButton("Projects", widget.onProjects, colors, textStyles),
-            _navButton("AI Work", widget.onAIWork, colors, textStyles),
-            _navButton("Achievements", widget.onAchievement, colors, textStyles),
-            _navButton("Skills", widget.onSkills, colors, textStyles),
-            _navButton("Contact", widget.onContact, colors, textStyles),
+            _navButton("Home", widget.onHome, textStyles),
+            _navButton("Projects", widget.onProjects, textStyles),
+            _navButton("AI Work", widget.onAIWork, textStyles),
+            _navButton("Achievements", widget.onAchievement, textStyles),
+            _navButton("Skills", widget.onSkills, textStyles),
+            _navButton("Contact", widget.onContact, textStyles),
           ],
         ),
       ],
@@ -120,47 +121,25 @@ class _NavBarState extends State<NavBar> {
           alignment: Alignment.centerLeft,
           child: Text("Mohit", style: textStyles.navTitleMobile),
         ),
-
         const SizedBox(height: 12),
-
         SizedBox(
           height: 36,
           child: PageView.builder(
             controller: _pageController,
             itemCount: _items.length,
-            onPageChanged: (index) {
-              _items[index].onTap();
-            },
+            onPageChanged: (index) => _items[index].onTap(),
             itemBuilder: (_, index) {
               return Center(
-                child: AnimatedBuilder(
-                  animation: _pageController,
-                  builder: (context, child) {
-                    double? scale = 1.0;
-
-                    if (_pageController.position.haveDimensions) {
-                      final page =
-                          _pageController.page ?? _pageController.initialPage;
-                      scale = (1 - (page - index).abs())
-                          .clamp(0.85, 1.0) as double?;
-                    }
-
-                    return Transform.scale(
-                      scale: scale,
-                      child: child,
-                    );
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 18, vertical: 6),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: colors.navbarBorder),
-                    ),
-                    child: Text(
-                      _items[index].label,
-                      style: textStyles.navItemMobile,
-                    ),
+                child: Container(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 18, vertical: 6),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: colors.navbarBorder),
+                  ),
+                  child: Text(
+                    _items[index].label,
+                    style: textStyles.navItemMobile,
                   ),
                 ),
               );
@@ -171,11 +150,10 @@ class _NavBarState extends State<NavBar> {
     );
   }
 
-  // ================= SHARED BUTTON =================
+  // ================= NAV BUTTON =================
   Widget _navButton(
       String label,
       VoidCallback onTap,
-      AppColors colors,
       AppTextStyles textStyles,
       ) {
     return Padding(
@@ -189,52 +167,90 @@ class _NavBarState extends State<NavBar> {
   }
 }
 
-// ================= THEME TOGGLE =================
-class _ThemeToggle extends StatelessWidget {
+// ================= THEME MODE TOGGLE =================
+class ThemeModeToggle extends StatelessWidget {
   final AppColors colors;
+  const ThemeModeToggle({super.key, required this.colors});
 
-  const _ThemeToggle({required this.colors});
-
-  void _toggleTheme() {
-    final current = themeController.mode;
-
-    if (current == AppThemeMode.system) {
-      themeController.setTheme(AppThemeMode.light);
-    } else if (current == AppThemeMode.light) {
-      themeController.setTheme(AppThemeMode.dark);
-    } else {
-      themeController.setTheme(AppThemeMode.system);
+  int _indexForMode(AppThemeMode mode) {
+    switch (mode) {
+      case AppThemeMode.light:
+        return 1;
+      case AppThemeMode.dark:
+        return 2;
+      case AppThemeMode.system:
+      default:
+        return 0;
     }
   }
 
-  IconData _iconForMode(AppThemeMode mode) {
-    switch (mode) {
-      case AppThemeMode.light:
-        return Icons.light_mode;
-      case AppThemeMode.dark:
-        return Icons.dark_mode;
-      case AppThemeMode.system:
+  void _onSelect(int index) {
+    switch (index) {
+      case 1:
+        themeController.setTheme(AppThemeMode.light);
+        break;
+      case 2:
+        themeController.setTheme(AppThemeMode.dark);
+        break;
       default:
-        return Icons.brightness_auto;
+        themeController.setTheme(AppThemeMode.system);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final selectedIndex = _indexForMode(themeController.mode);
+
+    return Container(
+      padding: const EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        color: colors.navbarBackground,
+        borderRadius: BorderRadius.only(bottomRight: Radius.circular(14), bottomLeft: Radius.circular(14)),
+        boxShadow: colors.navbarShadow,
+      ),
+      child: Stack(
+        children: [
+          AnimatedAlign(
+            duration: const Duration(milliseconds: 250),
+            curve: Curves.easeOut,
+            alignment: Alignment(-1 + selectedIndex * 1.0, 0),
+            child: Container(
+              width: 40,
+              height: 34,
+              decoration: BoxDecoration(
+                color: colors.textPrimary,
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _toggleIcon(Icons.brightness_auto, 0, selectedIndex),
+              _toggleIcon(Icons.light_mode, 1, selectedIndex),
+              _toggleIcon(Icons.dark_mode, 2, selectedIndex),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _toggleIcon(IconData icon, int index, int selectedIndex) {
+    final isActive = index == selectedIndex;
+
     return GestureDetector(
-      onTap: _toggleTheme,
-      child: Container(
-        height: 38,
-        padding: const EdgeInsets.symmetric(horizontal: 14),
-        decoration: BoxDecoration(
-          color: colors.navbarBackground,
-          borderRadius: BorderRadius.circular(14),
-          boxShadow: colors.navbarShadow,
-        ),
+      onTap: () => _onSelect(index),
+      behavior: HitTestBehavior.opaque,
+      child: SizedBox(
+        width: 40,
+        height: 34,
         child: Icon(
-          _iconForMode(themeController.mode),
-          size: 20,
-          color: colors.textPrimary,
+          icon,
+          size: 18,
+          color: isActive
+              ? colors.navbarBackground
+              : colors.textPrimary,
         ),
       ),
     );
@@ -245,6 +261,5 @@ class _ThemeToggle extends StatelessWidget {
 class _NavItem {
   final String label;
   final VoidCallback onTap;
-
   _NavItem(this.label, this.onTap);
 }
