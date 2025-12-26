@@ -249,7 +249,7 @@ class _ThemeToggleSwitchState extends State<ThemeToggleSwitch> {
   bool _isLoading = false;
 
   bool get _isDark =>
-      (themeController.savedMode ?? AppThemeMode.light) ==
+      (themeController.effectiveMode) ==
           AppThemeMode.dark;
 
   Future<void> _onToggle(bool value) async {

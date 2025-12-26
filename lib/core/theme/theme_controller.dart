@@ -22,6 +22,17 @@ class ThemeController extends ChangeNotifier {
     }
   }
 
+  AppThemeMode get effectiveMode {
+    if (_savedMode != null) {
+      return _savedMode!;
+    }
+    // No saved preference; determine effective mode based on system brightness
+    final brightness = WidgetsBinding.instance.window.platformBrightness;
+    return brightness == Brightness.dark
+        ? AppThemeMode.dark
+        : AppThemeMode.light;
+  }
+
   /// Load saved theme preference; if none found, keep _savedMode as null.
   Future<void> loadTheme() async {
     final prefs = await SharedPreferences.getInstance();
