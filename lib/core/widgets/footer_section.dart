@@ -155,11 +155,18 @@ class FooterSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text("Mohit", style: textStyles.navTitleMobile),
-            IconButton(
-              icon: Icon(Icons.download, color: colors.textPrimary),
-              onPressed: () => _open(
-                'https://raw.githubusercontent.com/mrmohitrajpurohit/mohit-portfolio/main/Mohit%20Resume%20Oct%2002%2C%202025.pdf',
-              ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              spacing: 2,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.download, color: colors.textPrimary),
+                  onPressed: () => _open(
+                    'https://raw.githubusercontent.com/mrmohitrajpurohit/mohit-portfolio/main/Mohit%20Resume%20Oct%2002%2C%202025.pdf',
+                  ),
+                ),
+                ThemeToggleSwitch(colors: colors)
+              ],
             ),
           ],
         ),
