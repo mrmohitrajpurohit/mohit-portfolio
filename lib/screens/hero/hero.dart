@@ -45,7 +45,7 @@ class _HeroSectionState extends State<HeroSection> {
                 alignment: Alignment.bottomCenter,
                 children: [
                   Image.network(
-                    '${AppConstants().configConstants.imageBaseUrl}assets/images/pf_profile.png',
+                    'assets/images/pf_profile.png',
                     height: 600,
                     fit: BoxFit.cover,
                   ),
