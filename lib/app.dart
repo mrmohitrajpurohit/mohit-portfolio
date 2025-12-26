@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       builder: (_, __) {
         return MaterialApp(
           navigatorKey: Keys.navigatorKey,
-          title: 'Michael Carter Portfolio',
+          title: 'Mohit Rajpurohit Portfolio',
           debugShowCheckedModeBanner: false,
 
           theme: AppTheme.lightTheme,

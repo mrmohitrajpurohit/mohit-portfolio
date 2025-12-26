@@ -40,6 +40,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  assets:
+    - assets/images/
 
   # Optional: Add fonts section if using custom fonts manually (skip if using google_fonts)
   # fonts:

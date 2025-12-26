@@ -1,38 +1,126 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
+    <!--
+      If you are serving your web app in a path other than the root, change the
+      href value below to reflect the base path you are serving from.
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
+      The path provided below has to start and end with a slash "/" in order for
+      it to work correctly.
 
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+      For more details:
+      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
 
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="$FLUTTER_BASE_HREF">
+      This is a placeholder for base href that will be replaced by the value of
+      the `--base-href` argument provided to `flutter build`.
+    -->
+    <base href="$FLUTTER_BASE_HREF">
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="description" content="A new Flutter project.">
 
-  <!-- iOS meta tags & icons -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="mohit_portfolio">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+    <!-- iOS meta tags & icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="mohit_portfolio">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>mohit_portfolio</title>
-  <link rel="manifest" href="manifest.json">
+    <title>Mohit Portfolio</title>
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <script src="flutter_bootstrap.js" async></script>
+
+
+<!-- Native Web Splash -->
+<div id="native-splash">
+    <div class="splash-content">
+        <img
+                src="splash_logo.png"
+                alt="Logo"
+                class="splash-logo"
+        />
+        <p class="splash-tagline">Building scalable digital experiences</p>
+    </div>
+</div>
+
+<!-- Flutter app mounts here -->
+<script src="flutter_bootstrap.js" async></script>
+<script>
+    window.addEventListener('flutter-first-frame', function () {
+      const splash = document.getElementById('native-splash');
+      if (splash) {
+        splash.style.opacity = '0';
+        setTimeout(() => {
+          splash.remove();
+        }, 700); // must match CSS transition
+      }
+    });
+</script>
+
+<style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #101010;
+      overflow: hidden;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont;
+    }
+
+    /* Native Splash Container */
+    #native-splash {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(
+        180deg,
+        #b4b4b4 0%,
+        #525252 35%,
+        #212121 70%,
+        #101010 100%
+      );
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 600ms ease;
+    }
+
+    .splash-content {
+      text-align: center;
+      transform: translateY(-6px);
+      animation: splashFadeIn 700ms ease-out forwards;
+    }
+
+    .splash-logo {
+<!--      width: 50%;-->
+<!--      height: 50%;-->
+      object-fit: cover;
+      margin-bottom: 14px;
+    }
+
+    .splash-tagline {
+      font-size: 14px;
+      letter-spacing: 0.4px;
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0;
+    }
+
+    @keyframes splashFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+</style>
 </body>
+
 </html>
