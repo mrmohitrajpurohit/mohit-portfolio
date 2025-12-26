@@ -14,6 +14,7 @@ class BuildConfig {
   final String emailJsServiceId;
   final String emailJsTemplateId;
   final String emailJsPublicKey;
+  final String imageBaseUrl;
 
   BuildConfig({
     required this.apiKey,
@@ -26,6 +27,7 @@ class BuildConfig {
     required this.emailJsServiceId,
     required this.emailJsTemplateId,
     required this.emailJsPublicKey,
+    required this.imageBaseUrl,
   });
 
   factory BuildConfig.fromJson(Map<String, dynamic> json) {
@@ -40,6 +42,7 @@ class BuildConfig {
       emailJsServiceId: json['emailJsServiceId'],
       emailJsTemplateId: json['template_id'],
       emailJsPublicKey: json['emailJsPublicKey'],
+      imageBaseUrl: json['imageBaseUrl'],
     );
   }
 }

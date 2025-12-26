@@ -117,7 +117,7 @@ class _FeaturedWorksState extends State<FeaturedWorks> {
                               borderRadius: BorderRadius.circular(20),
                               child: Container(
                                 color: AppColors.white,
-                                child: Image.asset(
+                                child: Image.network(
                                   projectData["relevantImages"][0],
                                   fit: BoxFit.cover,
                                   width: double.infinity,

@@ -4,11 +4,14 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../services/remote_config_service.dart';
+
 class AppConstants {
   static const String appTitle = 'My Flutter App';
   static const int maxUsers = 100;
   static const double pi = 3.14159;
   static const Color primaryColor = Colors.blue;
+  final configConstants = RemoteConfigService.instance.buildConfig;
 
   static bool get isMobile => !kIsWeb && (Platform.isAndroid || Platform.isIOS);
 

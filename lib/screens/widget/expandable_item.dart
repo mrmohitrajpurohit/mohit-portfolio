@@ -79,7 +79,7 @@ class _ExpandableItemState extends State<ExpandableItem> {
             margin: const EdgeInsets.only(left: 36, top: 12, bottom: 12),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12),
-              child: Image.asset(
+              child: Image.network(
                 widget.imagePath,
                 height: 170,
                 width: double.infinity,

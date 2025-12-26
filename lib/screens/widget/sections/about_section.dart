@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mohit_portfolio/core/constants/app_constants.dart';
 
 class AboutSection extends StatelessWidget {
-  const AboutSection({super.key});
+  AboutSection({super.key});
 
   // NEW About paragraph
   static const String aboutParagraph = '''
@@ -11,30 +12,30 @@ My work spans AI automation, R&D, FastAPI/LangChain integrations, cloud deployme
 ''';
 
   // UPDATED TIMELINE
-  final List<Map<String, String>> _timeline = const [
+  final List<Map<String, String>> _timeline = [
     {
       'time': '2023',
       'title': 'Foundation & Internship',
       'desc': 'AI Chef (Flutter+Firebase), Kirana Friends (Android Kotlin). Learned full app lifecycle.',
-      'icon': 'assets/images/icon_mobile.png',
+      'icon': '${AppConstants().configConstants.imageBaseUrl}assets/images/icon_mobile.png',
     },
     {
       'time': '2024',
       'title': 'Professional Growth',
       'desc': 'Vehya: AI chat, ML Kit, ARKit demo, R&D, Flutter advanced development.',
-      'icon': 'assets/images/icon_ai_timeline.png',
+      'icon': '${AppConstants().configConstants.imageBaseUrl}assets/images/icon_ai_timeline.png',
     },
     {
       'time': '2025',
       'title': 'Cross-Platform Expansion',
       'desc': 'Sendee, Kurudy, Nandi ERP — NextJS, React Native, APIs, Stripe/Plaid, AI training phase.',
-      'icon': 'assets/images/icon_web.png',
+      'icon': '${AppConstants().configConstants.imageBaseUrl}assets/images/icon_web.png',
     },
     {
       'time': 'Late 2025 - Present',
       'title': 'Full-Stack + Cloud',
       'desc': 'Disctopia & Wavve: NextJS, NestJS, AWS, deployments, scalable backend work.',
-      'icon': 'assets/images/icon_experience.png',
+      'icon': '${AppConstants().configConstants.imageBaseUrl}assets/images/icon_experience.png',
     },
   ];
 
@@ -168,21 +169,21 @@ My work spans AI automation, R&D, FastAPI/LangChain integrations, cloud deployme
   Widget _highlightCards() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
-      children: const [
+      children: [
         Expanded(child: _MiniHighlightCard(
-          iconPath: 'assets/images/icon_app.png',
+          iconPath: '${AppConstants().configConstants.imageBaseUrl}assets/images/icon_app.png',
           title: 'App Development',
           subtitle: 'Android, Flutter & React Native apps with production deployments.',
         )),
-        SizedBox(width: 12),
+        const SizedBox(width: 12),
         Expanded(child: _MiniHighlightCard(
-          iconPath: 'assets/images/icon_web.png',
+          iconPath: '${AppConstants().configConstants.imageBaseUrl}assets/images/icon_web.png',
           title: 'Web Development',
           subtitle: 'Next.js platforms, ERP dashboards & scalable backend integrations.',
         )),
-        SizedBox(width: 12),
+        const SizedBox(width: 12),
         Expanded(child: _MiniHighlightCard(
-          iconPath: 'assets/images/icon_ai.png',
+          iconPath: '${AppConstants().configConstants.imageBaseUrl}assets/images/icon_ai.png',
           title: 'AI Systems',
           subtitle: 'AI assistants, LangChain, FastAPI, Vapi AI & automation workflows.',
         )),
@@ -248,8 +249,8 @@ My work spans AI automation, R&D, FastAPI/LangChain integrations, cloud deployme
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(14),
-          child: Image.asset(
-            'assets/images/about_mohit.png',
+          child: Image.network(
+            '${AppConstants().configConstants.imageBaseUrl}assets/images/about_mohit.png',
             height: 140,
             width: 140,
             fit: BoxFit.cover,
@@ -422,7 +423,7 @@ class _MiniHighlightCard extends StatelessWidget {
                 color: Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Image.asset(
+              child: Image.network(
                 iconPath,
                 height: 32,
                 width: 32,

@@ -114,7 +114,7 @@ class _ProjectDialogState extends State<ProjectDialog> {
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
-                            child: Image.asset(
+                            child: Image.network(
                               images[index],
                               fit: BoxFit.cover,
                             ),

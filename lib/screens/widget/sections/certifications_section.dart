@@ -1,6 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
+import '../../../core/constants/app_constants.dart';
+import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_text_styles.dart';
+
 class CertificationsSection extends StatelessWidget {
   const CertificationsSection({super.key});
 
@@ -8,6 +12,9 @@ class CertificationsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final bool isMobile = width < 700;
+
+    final colors = AppColors.of(context);
+    final textStyles = AppTextStyles.of(context);
 
     final List<Map<String, dynamic>> allItems = [
       ...certificationsData,
@@ -19,17 +26,13 @@ class CertificationsSection extends StatelessWidget {
         horizontal: isMobile ? 16 : 60,
         vertical: isMobile ? 60 : 90,
       ),
-      color: Colors.white,
+      color: colors.certSectionBackground,
       child: Column(
         children: [
           Text(
             "Certifications & Achievements",
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: isMobile ? 22 : 30,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 0.3,
-            ),
+            style: textStyles.certSectionTitle(isMobile),
           ),
 
           const SizedBox(height: 12),
@@ -39,11 +42,7 @@ class CertificationsSection extends StatelessWidget {
             child: Text(
               "Verified certifications, recognitions, and milestones that reflect my learning journey and professional growth.",
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: isMobile ? 14 : 16,
-                height: 1.6,
-                color: Colors.black87,
-              ),
+              style: textStyles.certSectionDesc(isMobile),
             ),
           ),
 
@@ -104,6 +103,9 @@ class _CertificateCardState extends State<_CertificateCard> {
     final bool isShowEye = widget.item['isShowEye'] ?? true;
     final String? imagePath = widget.item['image'];
 
+    final colors = AppColors.of(context);
+    final textStyles = AppTextStyles.of(context);
+
     return MouseRegion(
       onEnter: (_) => setState(() => hover = true),
       onExit: (_) => setState(() => hover = false),
@@ -113,7 +115,7 @@ class _CertificateCardState extends State<_CertificateCard> {
           borderRadius: BorderRadius.circular(18),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.08),
+              color: colors.certCardShadow,
               blurRadius: 18,
               offset: const Offset(0, 8),
             ),
@@ -126,15 +128,15 @@ class _CertificateCardState extends State<_CertificateCard> {
               // ================= BACKGROUND =================
               Positioned.fill(
                 child: imagePath != null && imagePath.isNotEmpty
-                    ? Image.asset(
+                    ? Image.network(
                   imagePath,
                   fit: BoxFit.cover,
-                  color: Colors.black.withOpacity(0.25),
+                  color: colors.certImageOverlay,
                   colorBlendMode: BlendMode.darken,
                   errorBuilder: (_, __, ___) =>
-                      _fallbackBackground(),
+                      _fallbackBackground(colors),
                 )
-                    : _fallbackBackground(),
+                    : _fallbackBackground(colors),
               ),
 
               // ================= BLUR =================
@@ -142,7 +144,7 @@ class _CertificateCardState extends State<_CertificateCard> {
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 2.5, sigmaY: 2.5),
                   child: Container(
-                    color: Colors.black.withOpacity(0.12),
+                    color: colors.certBlurOverlay,
                   ),
                 ),
               ),
@@ -171,21 +173,14 @@ class _CertificateCardState extends State<_CertificateCard> {
 
                     Text(
                       widget.item['title'] ?? "",
-                      style: TextStyle(
-                        fontSize: isMobile ? 15 : 17,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                      ),
+                      style: textStyles.certCardTitle(isMobile),
                     ),
 
                     const SizedBox(height: 6),
 
                     Text(
                       widget.item['subtitle'] ?? "",
-                      style: TextStyle(
-                        fontSize: isMobile ? 13 : 14,
-                        color: Colors.white70,
-                      ),
+                      style: textStyles.certCardSubtitle(isMobile),
                     ),
                   ],
                 ),
@@ -197,13 +192,13 @@ class _CertificateCardState extends State<_CertificateCard> {
     );
   }
 
-  Widget _fallbackBackground() {
+  Widget _fallbackBackground(AppColors colors) {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Colors.grey.shade300,
-            Colors.grey.shade100,
+            colors.certFallbackStart,
+            colors.certFallbackEnd,
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -221,23 +216,25 @@ class _ImagePreviewDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColors.of(context);
+
     return Stack(
       children: [
         GestureDetector(
           onTap: () => Navigator.pop(context),
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-            child: Container(color: Colors.black.withOpacity(0.6)),
+            child: Container(color: colors.certDialogBackdrop),
           ),
         ),
         Center(
           child: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: colors.certDialogBackground,
               borderRadius: BorderRadius.circular(18),
             ),
-            child: Image.asset(
+            child: Image.network(
               imagePath,
               fit: BoxFit.contain,
               errorBuilder: (_, __, ___) =>
@@ -255,37 +252,44 @@ final List<Map<String, dynamic>> certificationsData = [
   {
     "title": "Oracle Certified Foundation Associate",
     "subtitle": "Oracle • Jan 2022",
-    "image": "assets/certifications/oracle_foundation.png"
+    "image":
+    "${AppConstants().configConstants.imageBaseUrl}assets/certifications/oracle_foundation.png"
   },
   {
     "title": "Android Webinar Participation",
     "subtitle": "May 2020",
-    "image": "assets/certifications/android_webinar.png"
+    "image":
+    "${AppConstants().configConstants.imageBaseUrl}assets/certifications/android_webinar.png"
   },
   {
     "title": "Internal Hackathon Evaluation",
     "subtitle": "SSIU • March 2022",
-    "image": "assets/certifications/hackathon_eval.png"
+    "image":
+    "${AppConstants().configConstants.imageBaseUrl}assets/certifications/hackathon_eval.png"
   },
   {
     "title": "AWS Billing & Cost Management",
     "subtitle": "AWS • Apr 2022",
-    "image": "assets/certifications/aws_billing.png"
+    "image":
+    "${AppConstants().configConstants.imageBaseUrl}assets/certifications/aws_billing.png"
   },
   {
     "title": "Java Programming Certificate",
     "subtitle": "Great Learning • Oct 2021",
-    "image": "assets/certifications/java_great_learning.png"
+    "image":
+    "${AppConstants().configConstants.imageBaseUrl}assets/certifications/java_great_learning.png"
   },
   {
     "title": "CodeChef Go Code Participation",
     "subtitle": "Feb 2022",
-    "image": "assets/certifications/codechef_go_code.png"
+    "image":
+    "${AppConstants().configConstants.imageBaseUrl}assets/certifications/codechef_go_code.png"
   },
   {
     "title": "MSME Entrepreneurship Program",
     "subtitle": "Nov 2021",
-    "image": "assets/certifications/msme_program.png"
+    "image":
+    "${AppConstants().configConstants.imageBaseUrl}assets/certifications/msme_program.png"
   },
 ];
 
@@ -293,18 +297,21 @@ final List<Map<String, dynamic>> achievementsData = [
   {
     "title": "5 Stars in Java",
     "subtitle": "HackerRank Competitive Programming",
-    "image": "assets/certifications/java_hackerrank_certi.png"
+    "image":
+    "${AppConstants().configConstants.imageBaseUrl}assets/certifications/java_hackerrank_certi.png"
   },
   {
     "title": "Executive Member",
     "subtitle": "CodeChef SSIU Chapter",
     "isShowEye": false,
-    "image": "assets/certifications/executive_member.png"
+    "image":
+    "${AppConstants().configConstants.imageBaseUrl}assets/certifications/executive_member.png"
   },
   {
     "title": "Evaluator — Internal Hackathon",
     "subtitle": "SSIU Gandhinagar",
     "isShowEye": false,
-    "image": "assets/certifications/internal_hackathon.png"
+    "image":
+    "${AppConstants().configConstants.imageBaseUrl}assets/certifications/internal_hackathon.png"
   },
 ];

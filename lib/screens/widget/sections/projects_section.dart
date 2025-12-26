@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../data.dart';
+import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_text_styles.dart';
 import '../project_carousel_card.dart';
 
 class ProjectsSection extends StatelessWidget {
@@ -11,26 +13,28 @@ class ProjectsSection extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final bool isMobile = width < 700;
 
+    final colors = AppColors.of(context);
+    final textStyles = AppTextStyles.of(context);
+
     return Container(
-      color: Colors.white,
+      color: colors.projectsSectionBackground,
       padding: EdgeInsets.symmetric(
         vertical: isMobile ? 50 : 70,
         horizontal: isMobile ? 16 : 40,
       ),
       child: Column(
         children: [
-          const Text(
+          Text(
             "Projects",
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            style: textStyles.projectsTitle,
           ),
           const SizedBox(height: 10),
-          const Text(
+          Text(
             "A combined showcase of my Web & Mobile development work — with live links and project visuals.",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16, color: Colors.black87),
+            style: textStyles.projectsSubtitle,
           ),
           SizedBox(height: isMobile ? 25 : 35),
-
           _projectsGrid(context),
         ],
       ),
@@ -50,7 +54,7 @@ class ProjectsSection extends StatelessWidget {
         aspectRatio = 1.6;
       } else {
         count = 1;
-        aspectRatio = 1.25; // 👈 better for mobile
+        aspectRatio = 1.25;
       }
 
       return GridView.builder(
