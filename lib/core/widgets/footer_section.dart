@@ -265,6 +265,7 @@ class _ThemeToggleSwitchState extends State<ThemeToggleSwitch> {
   @override
   Widget build(BuildContext context) {
     final colors = widget.colors;
+    final bool isDarkTheme = colors.isDark;
 
     return AnimatedToggleSwitch<bool>.dual(
       current: _isDark,
@@ -273,26 +274,39 @@ class _ThemeToggleSwitchState extends State<ThemeToggleSwitch> {
       height: 30,
       spacing: 0,
       indicatorSize: const Size(25, 25),
-      // animationDuration: const Duration(milliseconds: 250),
       loading: _isLoading,
       onChanged: _onToggle,
-      // loadingIconBuilder: (context, t) => SizedBox(
-      //   width: 18,
-      //   height: 18,
-      //   child: CircularProgressIndicator(
-      //     strokeWidth: 2,
-      //     valueColor: AlwaysStoppedAnimation<Color>(
-      //       _isLoading ? colors.navbarBackground : colors.textPrimary,
-      //     ),
-      //   ),
-      // ),
-      iconBuilder: (value) => Icon(
-        value ? Icons.dark_mode : Icons.light_mode,
-        size: 18,
-        color: value
-            ? colors.navbarBackground
-            : colors.textPrimary,
-      ),
+
+      /// TRACK + THUMB STYLING
+      styleBuilder: (value) {
+        return ToggleStyle(
+          backgroundColor: isDarkTheme
+              ? const Color(0xFF2A2A2A) // dark track
+              : const Color(0xFFE5E7EB), // light track
+          indicatorColor: value
+              ? (isDarkTheme ? Colors.white : const Color(0xFF111111))
+              : (isDarkTheme ? Colors.white : const Color(0xFF111111)),
+          borderRadius: BorderRadius.circular(20),
+        );
+      },
+
+      /// ICON
+      iconBuilder: (value) {
+        final bool isOn = value;
+
+        return Icon(
+          isOn ? Icons.dark_mode : Icons.light_mode,
+          size: 16,
+          color: isOn
+              ? (isDarkTheme
+              ? const Color(0xFF111111) // dark icon on light thumb
+              : Colors.white)          // light icon on dark thumb
+              : (isDarkTheme
+              ? const Color(0xFF111111)
+              : Colors.white),
+        );
+      },
     );
   }
+
 }
