@@ -6,38 +6,55 @@ import 'app_theme_mode.dart';
 class ThemeController extends ChangeNotifier {
   static const _storageKey = 'app_theme_mode';
 
-  AppThemeMode _mode = AppThemeMode.system;
+  // If _savedMode is null => no user preference saved => use system theme
+  AppThemeMode? _savedMode;
 
-  AppThemeMode get mode => _mode;
+  AppThemeMode? get savedMode => _savedMode;
 
+  /// Returns the active ThemeMode. If no saved preference exists, return system.
   ThemeMode get themeMode {
-    switch (_mode) {
+    if (_savedMode == null) return ThemeMode.system;
+    switch (_savedMode!) {
       case AppThemeMode.light:
         return ThemeMode.light;
       case AppThemeMode.dark:
         return ThemeMode.dark;
-      case AppThemeMode.system:
-      default:
-        return ThemeMode.system;
     }
   }
 
+  /// Load saved theme preference; if none found, keep _savedMode as null.
   Future<void> loadTheme() async {
     final prefs = await SharedPreferences.getInstance();
     final value = prefs.getString(_storageKey);
 
     if (value != null) {
-      _mode = AppThemeMode.values.firstWhere(
-            (e) => e.name == value,
-        orElse: () => AppThemeMode.system,
-      );
+      // Map stored value to AppThemeMode if possible, otherwise clear saved mode
+      try {
+        _savedMode = AppThemeMode.values.firstWhere(
+          (e) => e.name == value,
+        );
+      } catch (_) {
+        _savedMode = null;
+      }
+    } else {
+      _savedMode = null; // explicit: no saved preference => system
     }
+
+    // Do not call notifyListeners() here; caller (main) will rebuild after init
   }
 
-  Future<void> setTheme(AppThemeMode mode) async {
-    _mode = mode;
+  /// Set a theme preference. Pass `null` to clear preference and revert to system.
+  Future<void> setTheme(AppThemeMode? mode) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_storageKey, mode.name);
+
+    if (mode == null) {
+      _savedMode = null;
+      await prefs.remove(_storageKey);
+    } else {
+      _savedMode = mode;
+      await prefs.setString(_storageKey, mode.name);
+    }
+
     notifyListeners();
   }
 }

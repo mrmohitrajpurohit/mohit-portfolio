@@ -1,11 +1,14 @@
+import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+import '../../main.dart';
 import '../constants/app_constants.dart';
 import '../services/remote_config_service.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
+import '../theme/app_theme_mode.dart';
 
 final config = RemoteConfigService.instance.buildConfig;
 
@@ -122,15 +125,20 @@ class FooterSection extends StatelessWidget {
         ),
 
         // RIGHT
-        TextButton.icon(
-          onPressed: () => _open(
-            'https://raw.githubusercontent.com/mrmohitrajpurohit/mohit-portfolio/main/Mohit%20Resume%20Oct%2002%2C%202025.pdf',
-          ),
-          icon: Icon(Icons.download, size: 16, color: colors.textPrimary),
-          label: Text(
-            "Resume",
-            style: textStyles.navItemMobile,
-          ),
+        Column(
+          children: [
+            TextButton.icon(
+              onPressed: () => _open(
+                'https://raw.githubusercontent.com/mrmohitrajpurohit/mohit-portfolio/main/Mohit%20Resume%20Oct%2002%2C%202025.pdf',
+              ),
+              icon: Icon(Icons.download, size: 16, color: colors.textPrimary),
+              label: Text(
+                "Resume",
+                style: textStyles.navItemMobile,
+              ),
+            ),
+            ThemeToggleSwitch(colors: colors)
+          ],
         ),
       ],
     );
@@ -213,6 +221,77 @@ class FooterSection extends StatelessWidget {
             const Icon(Icons.link, size: 18),
           ),
         ),
+      ),
+    );
+  }
+}
+
+/* =========================================================
+   REAL TOGGLE SWITCH (ON / OFF)
+   ========================================================= */
+
+class ThemeToggleSwitch extends StatefulWidget {
+  final AppColors colors;
+  const ThemeToggleSwitch({super.key, required this.colors});
+
+  @override
+  State<ThemeToggleSwitch> createState() => _ThemeToggleSwitchState();
+}
+
+class _ThemeToggleSwitchState extends State<ThemeToggleSwitch> {
+  bool _isLoading = false;
+
+  bool get _isDark =>
+      (themeController.savedMode ?? AppThemeMode.light) ==
+          AppThemeMode.dark;
+
+  Future<void> _onToggle(bool value) async {
+    if (_isLoading) return;
+
+    setState(() => _isLoading = true);
+
+    themeController.setTheme(
+      value ? AppThemeMode.dark : AppThemeMode.light,
+    );
+
+    // Smooth UX delay
+    await Future.delayed(const Duration(milliseconds: 300));
+
+    if (mounted) {
+      setState(() => _isLoading = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = widget.colors;
+
+    return AnimatedToggleSwitch<bool>.dual(
+      current: _isDark,
+      first: false,
+      second: true,
+      height: 30,
+      spacing: 0,
+      indicatorSize: const Size(25, 25),
+      // animationDuration: const Duration(milliseconds: 250),
+      loading: _isLoading,
+      onChanged: _onToggle,
+      // loadingIconBuilder: (context, t) => SizedBox(
+      //   width: 18,
+      //   height: 18,
+      //   child: CircularProgressIndicator(
+      //     strokeWidth: 2,
+      //     valueColor: AlwaysStoppedAnimation<Color>(
+      //       _isLoading ? colors.navbarBackground : colors.textPrimary,
+      //     ),
+      //   ),
+      // ),
+      iconBuilder: (value) => Icon(
+        value ? Icons.dark_mode : Icons.light_mode,
+        size: 18,
+        color: value
+            ? colors.navbarBackground
+            : colors.textPrimary,
       ),
     );
   }

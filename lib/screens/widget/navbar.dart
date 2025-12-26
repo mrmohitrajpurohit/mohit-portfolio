@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mohit_portfolio/core/theme/app_colors.dart';
 import 'package:mohit_portfolio/core/theme/app_text_styles.dart';
-import 'package:mohit_portfolio/core/theme/app_theme_mode.dart';
-import 'package:mohit_portfolio/main.dart';
 
 class NavBar extends StatefulWidget {
   final VoidCallback onHome;
@@ -37,7 +35,6 @@ class _NavBarState extends State<NavBar> {
   @override
   void initState() {
     super.initState();
-
     _items.addAll([
       _NavItem("Home", widget.onHome),
       _NavItem("Projects", widget.onProjects),
@@ -60,7 +57,6 @@ class _NavBarState extends State<NavBar> {
         return Stack(
           clipBehavior: Clip.none,
           children: [
-            // ================= MAIN NAVBAR =================
             Container(
               margin: EdgeInsets.symmetric(
                 horizontal: isMobile ? 12 : 20,
@@ -72,19 +68,12 @@ class _NavBarState extends State<NavBar> {
               ),
               decoration: BoxDecoration(
                 color: colors.navbarBackground,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(14), topRight: Radius.circular(14), bottomLeft: Radius.circular(14)),
+                borderRadius: BorderRadius.circular(14),
                 boxShadow: colors.navbarShadow,
               ),
               child: isMobile
                   ? _mobileNav(colors, textStyles)
                   : _desktopNav(colors, textStyles),
-            ),
-
-            // ================= THEME TOGGLE =================
-            Positioned(
-              right: isMobile ? 12 : 20,
-              bottom: isMobile ? -16 : -18,
-              child: ThemeModeToggle(colors: colors),
             ),
           ],
         );
@@ -92,7 +81,6 @@ class _NavBarState extends State<NavBar> {
     );
   }
 
-  // ================= DESKTOP NAV =================
   Widget _desktopNav(AppColors colors, AppTextStyles textStyles) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -112,7 +100,6 @@ class _NavBarState extends State<NavBar> {
     );
   }
 
-  // ================= MOBILE NAV =================
   Widget _mobileNav(AppColors colors, AppTextStyles textStyles) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -150,7 +137,6 @@ class _NavBarState extends State<NavBar> {
     );
   }
 
-  // ================= NAV BUTTON =================
   Widget _navButton(
       String label,
       VoidCallback onTap,
@@ -167,97 +153,10 @@ class _NavBarState extends State<NavBar> {
   }
 }
 
-// ================= THEME MODE TOGGLE =================
-class ThemeModeToggle extends StatelessWidget {
-  final AppColors colors;
-  const ThemeModeToggle({super.key, required this.colors});
 
-  int _indexForMode(AppThemeMode mode) {
-    switch (mode) {
-      case AppThemeMode.light:
-        return 1;
-      case AppThemeMode.dark:
-        return 2;
-      case AppThemeMode.system:
-      default:
-        return 0;
-    }
-  }
 
-  void _onSelect(int index) {
-    switch (index) {
-      case 1:
-        themeController.setTheme(AppThemeMode.light);
-        break;
-      case 2:
-        themeController.setTheme(AppThemeMode.dark);
-        break;
-      default:
-        themeController.setTheme(AppThemeMode.system);
-    }
-  }
+/* ================= MODEL ================= */
 
-  @override
-  Widget build(BuildContext context) {
-    final selectedIndex = _indexForMode(themeController.mode);
-
-    return Container(
-      padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        color: colors.navbarBackground,
-        borderRadius: BorderRadius.only(bottomRight: Radius.circular(14), bottomLeft: Radius.circular(14)),
-        boxShadow: colors.navbarShadow,
-      ),
-      child: Stack(
-        children: [
-          AnimatedAlign(
-            duration: const Duration(milliseconds: 250),
-            curve: Curves.easeOut,
-            alignment: Alignment(-1 + selectedIndex * 1.0, 0),
-            child: Container(
-              width: 40,
-              height: 34,
-              decoration: BoxDecoration(
-                color: colors.textPrimary,
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _toggleIcon(Icons.brightness_auto, 0, selectedIndex),
-              _toggleIcon(Icons.light_mode, 1, selectedIndex),
-              _toggleIcon(Icons.dark_mode, 2, selectedIndex),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _toggleIcon(IconData icon, int index, int selectedIndex) {
-    final isActive = index == selectedIndex;
-
-    return GestureDetector(
-      onTap: () => _onSelect(index),
-      behavior: HitTestBehavior.opaque,
-      child: SizedBox(
-        width: 40,
-        height: 34,
-        child: Icon(
-          icon,
-          size: 18,
-          color: isActive
-              ? colors.navbarBackground
-              : colors.textPrimary,
-        ),
-      ),
-    );
-  }
-}
-
-// ================= MODEL =================
 class _NavItem {
   final String label;
   final VoidCallback onTap;
