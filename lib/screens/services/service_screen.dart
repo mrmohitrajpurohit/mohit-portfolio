@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mohit_portfolio/screens/services/service_cards.dart';
 
 import '../../core/constants/app_constants.dart';
-import '../../core/theme/colors.dart';
+import '../../core/theme/app_colors.dart';
 import '../../view_model/home_view_model.dart';
 
 class ServiceScreen extends StatefulWidget {
@@ -65,7 +65,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
   @override
   Widget build(BuildContext context) {
     bool isMobile = AppConstants.isMobileView(context);
-
+    final appColors = AppColors.of(context);
     return LayoutBuilder(
       builder: (context, constraints) {
         final screenWidth = constraints.maxWidth;
@@ -99,7 +99,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                 style: GoogleFonts.instrumentSans(
                                   fontSize: textTitleSize,
                                   fontWeight: FontWeight.w500,
-                                  color: AppColors.grey,
+                                  color: appColors.grey,
                                   wordSpacing: 2,
                                   letterSpacing: 1,
                                 ),
@@ -114,7 +114,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                       style: GoogleFonts.instrumentSans(
                                         fontSize: textFontSize,
                                         fontWeight: FontWeight.w500,
-                                        color: AppColors.grey,
+                                        color: appColors.grey,
                                         wordSpacing: 2,
                                       ),
                                     ),
@@ -141,7 +141,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                 style: GoogleFonts.instrumentSans(
                                   fontSize: textTitleSize,
                                   fontWeight: FontWeight.w500,
-                                  color: AppColors.grey,
+                                  color: appColors.grey,
                                   wordSpacing: 2,
                                   letterSpacing: 1,
                                 ),
@@ -157,7 +157,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                         style: GoogleFonts.instrumentSans(
                                           fontSize: textFontSize,
                                           fontWeight: FontWeight.w500,
-                                          color: AppColors.grey,
+                                          color: appColors.grey,
                                           wordSpacing: 2,
                                         ),
                                       ),
@@ -199,10 +199,10 @@ class _ServiceScreenState extends State<ServiceScreen> {
                         highlight: index % 2 == 0 ? false : true,
                         backgroundColor: index % 2 == 0
                             ? Colors.white
-                            : AppColors.hoverButtonBg,
+                            : appColors.hoverButtonBg,
                         tileColor: index % 2 == 0
                             ? Colors.white
-                            : AppColors.hoverButtonBg,
+                            : appColors.hoverButtonBg,
                         borderColor: Colors.grey,
                         backgroundHoverColor: index % 2 == 0
                             ? Colors.white.withOpacity(0.7)
@@ -215,28 +215,28 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                 debugPrint("UI/UX clicked");
                               },
                               textColor: index % 2 == 0
-                                  ? AppColors.black
-                                  : AppColors.white,
+                                  ? appColors.black
+                                  : appColors.white,
                               iconColor: index % 2 == 0
-                                  ? AppColors.accent
-                                  : AppColors.hoverButtonBg,
+                                  ? appColors.accent
+                                  : appColors.hoverButtonBg,
                               iconBgColor: index % 2 == 0
-                                  ? AppColors.lightAccent
-                                  : AppColors.white,
+                                  ? appColors.lightAccent
+                                  : appColors.white,
                               screenWidth: screenWidth),
                           _buildCardContent(
                               title: "Start a Project",
                               icon: Icons.open_in_new,
                               onIconTap: () {},
                               textColor: index % 2 == 0
-                                  ? AppColors.black
-                                  : AppColors.white,
+                                  ? appColors.black
+                                  : appColors.white,
                               iconColor: index % 2 == 0
-                                  ? AppColors.accent
-                                  : AppColors.hoverButtonBg,
+                                  ? appColors.accent
+                                  : appColors.hoverButtonBg,
                               iconBgColor: index % 2 == 0
-                                  ? AppColors.lightAccent
-                                  : AppColors.white,
+                                  ? appColors.lightAccent
+                                  : appColors.white,
                               screenWidth: screenWidth),
                         ],
                       );

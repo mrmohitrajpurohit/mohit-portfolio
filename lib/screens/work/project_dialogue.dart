@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/constants/app_constants.dart';
-import '../../core/theme/colors.dart';
+import '../../core/theme/app_colors.dart';
 
 class ProjectDialog extends StatefulWidget {
   final Map<String, dynamic> projectData;
@@ -36,6 +36,7 @@ class _ProjectDialogState extends State<ProjectDialog> {
   @override
   Widget build(BuildContext context) {
     final List<dynamic> images = widget.projectData["relevantImages"] ?? [];
+    final appColors = AppColors.of(context);
 
     return Dialog(
       insetPadding: const EdgeInsets.all(16),
@@ -47,7 +48,7 @@ class _ProjectDialogState extends State<ProjectDialog> {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
-          color: AppColors.white,
+          color: appColors.white,
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.08),
@@ -65,7 +66,7 @@ class _ProjectDialogState extends State<ProjectDialog> {
               style: GoogleFonts.poppins(
                 fontSize: AppConstants.getTitleFontSize(widget.screenWidth),
                 fontWeight: FontWeight.w700,
-                color: AppColors.primary,
+                color: appColors.primary,
               ),
               textAlign: TextAlign.center,
             ),
@@ -78,7 +79,7 @@ class _ProjectDialogState extends State<ProjectDialog> {
                   "Ducium faccum lacidit lorem ipsum dolor sit amet, consectetur.",
               style: GoogleFonts.poppins(
                 fontSize: AppConstants.getDescriptionFontSize(widget.screenWidth),
-                color: AppColors.black.withOpacity(0.65),
+                color: appColors.black.withOpacity(0.65),
               ),
               textAlign: TextAlign.center,
             ),
@@ -177,7 +178,7 @@ class _ProjectDialogState extends State<ProjectDialog> {
                     width: isActive ? 16 : 8,
                     height: 8,
                     decoration: BoxDecoration(
-                      color: isActive ? AppColors.primary : AppColors.grey,
+                      color: isActive ? appColors.primary : appColors.grey,
                       borderRadius: BorderRadius.circular(12),
                     ),
                   );
@@ -202,14 +203,14 @@ class _ProjectDialogState extends State<ProjectDialog> {
                       vertical: 6,
                     ),
                     decoration: BoxDecoration(
-                      color: AppColors.hoverButtonBg,
+                      color: appColors.hoverButtonBg,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
                       widget.projectData["tags"][tagIndex],
                       style: GoogleFonts.poppins(
                         fontSize: 12,
-                        color: AppColors.primary,
+                        color: appColors.primary,
                       ),
                     ),
                   ),

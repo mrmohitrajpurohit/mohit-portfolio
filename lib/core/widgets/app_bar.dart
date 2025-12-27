@@ -4,7 +4,7 @@ import 'package:web/web.dart' as web;
 
 import '../../view_model/home_view_model.dart';
 import '../constants/app_constants.dart';
-import '../theme/colors.dart';
+import '../theme/app_colors.dart';
 import 'gradient_hover_button.dart';
 
 class AppBarCustom extends StatelessWidget {
@@ -30,6 +30,7 @@ class AppBarCustom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = AppColors.of(context);
     return isMobile
         ? AnimatedSwitcher(
             duration: Duration(milliseconds: 300),
@@ -52,12 +53,12 @@ class AppBarCustom extends StatelessWidget {
                     key: ValueKey('menu')) // must use a key
                 : SizedBox.shrink(key: ValueKey('empty')),
           )
-        : buildDesktopMenu(model: model);
+        : buildDesktopMenu(model: model, appColors: appColors);
   }
 
-  Widget buildDesktopMenu({required HomeViewModel model}) {
+  Widget buildDesktopMenu({required HomeViewModel model, required AppColors appColors}) {
     return Container(
-      color: AppColors.primary,
+      color: appColors.primary,
       padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
       child: Row(
         children: [
@@ -74,26 +75,30 @@ class AppBarCustom extends StatelessWidget {
                 model.updateState();
               },
               isMobile: false,
+              appColors: appColors,
               model: model),
           buildNavItem(
               text: "Services",
               onTap: () => model.scrollToSection(model.servicesKey),
               isMobile: false,
+              appColors: appColors,
               model: model),
           buildNavItem(
               text: "Work",
               onTap: () => model.scrollToSection(model.featureWorkKey),
               isMobile: false,
+              appColors: appColors,
               model: model),
           buildNavItem(
               text: "Contact",
               onTap: () => model.scrollToSection(model.contactKey),
               isMobile: false,
+              appColors: appColors,
               model: model),
           Spacer(),
           GradientHoverButton(
             isForDark: false,
-            gradientColors: [AppColors.black, AppColors.black],
+            gradientColors: [appColors.black, appColors.black],
             label: "Download Resume",
             onPressed: () {
               downloadResume();
@@ -108,6 +113,7 @@ class AppBarCustom extends StatelessWidget {
 
   Widget buildMobileMenu(
       {Key? key, required BuildContext context, required HomeViewModel model}) {
+    final appColors = AppColors.of(context);
     return Container(
       width: AppConstants.screenWidth(context),
       key: key,
@@ -116,7 +122,7 @@ class AppBarCustom extends StatelessWidget {
           bottomLeft: Radius.circular(25),
           bottomRight: Radius.circular(25),
         ),
-        color: AppColors.greyBlack,
+        color: appColors.greyBlack,
       ),
       height: 300,
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20),
@@ -129,7 +135,7 @@ class AppBarCustom extends StatelessWidget {
             style: GoogleFonts.instrumentSans(
               fontSize: 16,
               fontWeight: FontWeight.w700,
-              color: AppColors.primary,
+              color: appColors.primary,
               wordSpacing: 2,
             ),
           ),
@@ -137,25 +143,29 @@ class AppBarCustom extends StatelessWidget {
               text: "About",
               onTap: () => model.scrollToSection(model.introKey),
               isMobile: true,
+              appColors: appColors,
               model: model),
           buildNavItem(
               text: "Services",
               onTap: () => model.scrollToSection(model.servicesKey),
               isMobile: true,
+              appColors: appColors,
               model: model),
           buildNavItem(
               text: "Work",
               onTap: () => model.scrollToSection(model.featureWorkKey),
               isMobile: true,
+              appColors: appColors,
               model: model),
           buildNavItem(
               text: "Contact",
               onTap: () => model.scrollToSection(model.contactKey),
               isMobile: true,
+              appColors: appColors,
               model: model),
           GradientHoverButton(
             isForDark: true,
-            gradientColors: [AppColors.primary, AppColors.primary],
+            gradientColors: [appColors.primary, appColors.primary],
             label: "Download Resume",
             onPressed: () {
               downloadResume();
@@ -177,7 +187,7 @@ class AppBarCustom extends StatelessWidget {
       {required String text,
       required VoidCallback onTap,
       required bool isMobile,
-      required HomeViewModel model}) {
+      required HomeViewModel model, required AppColors appColors}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: InkWell(
@@ -193,8 +203,8 @@ class AppBarCustom extends StatelessWidget {
             fontSize: isMobile && model.isMenuOpen ? 12 : 18,
             fontWeight: FontWeight.w500,
             color: isMobile && model.isMenuOpen
-                ? AppColors.primary
-                : AppColors.greyBlack,
+                ? appColors.primary
+                : appColors.greyBlack,
             wordSpacing: 2,
           ),
         ),
