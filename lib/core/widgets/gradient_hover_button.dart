@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../view_model/home_view_model.dart';
 import '../constants/app_constants.dart';
-import '../theme/colors.dart';
+import '../theme/app_colors.dart';
 
 class GradientHoverButton extends StatefulWidget {
   final String label;
@@ -43,9 +43,10 @@ class _GradientHoverButtonState extends State<GradientHoverButton> {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = AppColors.of(context);
     final defaultHoverGradient = [
-      AppColors.hoverButtonBg,
-      AppColors.hoverButtonBg
+      appColors.hoverButtonBg,
+      appColors.hoverButtonBg
     ];
     final defaultGradient = [Colors.black, Colors.black];
 
@@ -101,22 +102,22 @@ class _GradientHoverButtonState extends State<GradientHoverButton> {
                 style: widget.textStyle ??
                     GoogleFonts.instrumentSans(
                       fontSize: labelSize,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w700,
                       color: _isHovered
-                          ? AppColors.primary
+                          ? appColors.primary
                           : widget.isForDark
-                              ? AppColors.greyBlack
-                              : AppColors.primary,
+                              ? appColors.greyBlack
+                              : appColors.primary,
                       wordSpacing: 2,
                     ),
               ),
               if (widget.icon != null) ...[
                 Icon(widget.icon!,
                     color: _isHovered
-                        ? AppColors.primary
+                        ? appColors.primary
                         : widget.isForDark
-                            ? AppColors.greyBlack
-                            : AppColors.primary,
+                            ? appColors.greyBlack
+                            : appColors.primary,
                     size: 15),
               ],
             ],

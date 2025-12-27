@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mohit_portfolio/screens/work/project_dialogue.dart';
 
 import '../../core/constants/app_constants.dart';
-import '../../core/theme/colors.dart';
+import '../../core/theme/app_colors.dart';
 import '../../view_model/home_view_model.dart';
 import '../services/hover_scroll_card.dart';
 
@@ -32,6 +32,7 @@ class _FeaturedWorksState extends State<FeaturedWorks> {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = AppColors.of(context);
     return LayoutBuilder(
       builder: (context, constraints) {
         final screenWidth = constraints.maxWidth;
@@ -43,7 +44,7 @@ class _FeaturedWorksState extends State<FeaturedWorks> {
         return Container(
           margin: EdgeInsets.symmetric(horizontal: devicePadding, vertical: 75),
           width: constraints.maxWidth,
-          color: AppColors.primary,
+          color: appColors.primary,
           child: Column(
             spacing: 20,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,7 +54,7 @@ class _FeaturedWorksState extends State<FeaturedWorks> {
                 style: GoogleFonts.instrumentSans(
                   fontSize: AppConstants.getPageNameFontSize(screenWidth),
                   fontWeight: FontWeight.w500,
-                  color: AppColors.grey,
+                  color: appColors.grey,
                   wordSpacing: 2,
                   letterSpacing: 1,
                 ),
@@ -116,7 +117,7 @@ class _FeaturedWorksState extends State<FeaturedWorks> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(20),
                               child: Container(
-                                color: AppColors.white,
+                                color: appColors.white,
                                 child: Image.network(
                                   projectData["relevantImages"][0],
                                   fit: BoxFit.cover,
@@ -147,13 +148,13 @@ class _FeaturedWorksState extends State<FeaturedWorks> {
                                               AppConstants.getPageNameFontSize(
                                                   screenWidth),
                                           fontWeight: FontWeight.w500,
-                                          color: AppColors.primary,
+                                          color: appColors.primary,
                                           wordSpacing: 2,
                                           shadows: [
                                             Shadow(
                                               offset: const Offset(4.0, 2.0),
                                               blurRadius: 15.0,
-                                              color: AppColors.primary,
+                                              color: appColors.primary,
                                             ),
                                           ],
                                         )

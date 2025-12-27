@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../constants/app_constants.dart';
-import '../theme/colors.dart';
+import '../theme/app_colors.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String? label;
   final String hintText;
   final Color borderColor;
+  final Color? hintColor;
+  final Color? inputTextColor;
   final Color backgroundColor;
   final int? maxLines;
   final bool isPassword;
@@ -26,10 +28,13 @@ class CustomTextFormField extends StatelessWidget {
     this.isPassword = false,
     this.keyboardType = TextInputType.text,
     this.validator,
+    this.hintColor,
+    this.inputTextColor,
   });
 
   @override
   Widget build(BuildContext context) {
+    final APPCOLORS = AppColors.of(context);
     final screenWidth = AppConstants.screenWidth(context);
 
     final textSize = AppConstants.getDescriptionFontSize(screenWidth);
@@ -46,7 +51,7 @@ class CustomTextFormField extends StatelessWidget {
                     style: GoogleFonts.instrumentSans(
                       fontSize: textSize,
                       fontWeight: FontWeight.w100,
-                      color: AppColors.primary,
+                      color: APPCOLORS.primaryVariant,
                       wordSpacing: 2,
                     ),
                   )
@@ -57,11 +62,11 @@ class CustomTextFormField extends StatelessWidget {
               style: GoogleFonts.instrumentSans(
                 fontSize: textSize,
                 fontWeight: FontWeight.w100,
-                color: AppColors.primary,
+                color: inputTextColor ?? APPCOLORS.primary,
                 wordSpacing: 2,
               ),
               maxLines: maxLines,
-              cursorColor: AppColors.primary,
+              cursorColor: APPCOLORS.primary,
               controller: controller,
               obscureText: isPassword,
               keyboardType: keyboardType,
@@ -91,10 +96,10 @@ class CustomTextFormField extends StatelessWidget {
                   hintStyle: GoogleFonts.instrumentSans(
                     fontSize: textSize,
                     fontWeight: FontWeight.w100,
-                    color: AppColors.grey,
+                    color: hintColor ?? APPCOLORS.grey,
                     wordSpacing: 2,
                   ),
-                  focusColor: AppColors.primary),
+                  focusColor: APPCOLORS.primary),
             ),
           ],
         );

@@ -4,7 +4,8 @@ import 'package:mohit_portfolio/core/utils/validators.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/constants/app_constants.dart';
-import '../../core/theme/colors.dart';
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_text_styles.dart';
 import '../../core/widgets/base_widget.dart';
 import '../../core/widgets/custom_button.dart';
 import '../../core/widgets/gradient_hover_button.dart';
@@ -24,6 +25,8 @@ class ContactInfo extends StatefulWidget {
 class _ContactInfoState extends State<ContactInfo> {
   @override
   Widget build(BuildContext context) {
+    final colors = AppColors.of(context);
+    final textStyles = AppTextStyles.of(context);
     return BaseWidget(
       model: ContactInfoViewModel(),
       builder: (context, model, child) {
@@ -39,30 +42,25 @@ class _ContactInfoState extends State<ContactInfo> {
             margin: EdgeInsets.symmetric(
                 horizontal: isMobile ? 12 : spacing * 10, vertical: spacing),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: 'Ready to create something amazing? ',
-                        style: GoogleFonts.instrumentSans(
-                          fontSize: textFontSize,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.grey,
-                        ),
-                      ),
-                      TextSpan(
-                        text: 'let’s talk!',
-                        style: GoogleFonts.instrumentSans(
-                          fontSize: textFontSize,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
+                Text(
+                  "Ready to create something amazing? ",
+                  textAlign: TextAlign.center,
+                  style: textStyles.skillsSectionTitle(isMobile),
+                ),
+
+                const SizedBox(height: 10),
+
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 820),
+                  child: Text(
+                    "let’s talk!",
+                    textAlign: TextAlign.center,
+                    style: textStyles.skillsSectionDesc(isMobile),
                   ),
                 ),
+
                 const SizedBox(height: 40),
                 Wrap(
                   spacing: 40,
@@ -72,9 +70,10 @@ class _ContactInfoState extends State<ContactInfo> {
                     _contactFormCard(
                         model: model,
                         width: isMobile ? 400 : cardWidth,
-                        height: cardHeight),
+                        height: cardHeight,
+                    appColors: colors),
                     _callCard(
-                        width: isMobile ? 400 : cardWidth, height: cardHeight),
+                        width: isMobile ? 400 : cardWidth, height: cardHeight, colors: colors),
                     // right box
                   ],
                 ),
@@ -86,17 +85,23 @@ class _ContactInfoState extends State<ContactInfo> {
     );
   }
 
-  Widget _contactFormCard(
-      {required double height,
-      required double width,
-      required ContactInfoViewModel model}) {
+  Widget _contactFormCard({
+    required double height,
+    required double width,
+    required ContactInfoViewModel model,
+    required AppColors appColors,
+  }) {
     return ConstrainedBox(
       constraints: BoxConstraints(maxWidth: width),
       child: Container(
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          color: AppColors.greyBlack,
           borderRadius: BorderRadius.circular(20),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: appColors.contactCardGradient,
+          ),
         ),
         child: Form(
           key: model.formKey,
@@ -106,8 +111,9 @@ class _ContactInfoState extends State<ContactInfo> {
               CustomTextFormField(
                 label: "Name",
                 controller: model.nameController,
-                backgroundColor: AppColors.darkGrey,
-                borderColor: AppColors.lightGrey,
+                backgroundColor: appColors.contactFieldBackground,
+                borderColor: appColors.contactFieldBorder,
+                inputTextColor: appColors.contactFieldText,
                 hintText: 'Jane Smith',
                 validator: (value) {
                   if (value == null || !value.isValidName) {
@@ -119,8 +125,9 @@ class _ContactInfoState extends State<ContactInfo> {
               CustomTextFormField(
                 label: "Email",
                 controller: model.emailController,
-                backgroundColor: AppColors.darkGrey,
-                borderColor: AppColors.lightGrey,
+                backgroundColor: appColors.contactFieldBackground,
+                borderColor: appColors.contactFieldBorder,
+                inputTextColor: appColors.contactFieldText,
                 hintText: 'yourname@gmail.com',
                 validator: (value) {
                   if (value == null || !value.isValidEmail) {
@@ -133,8 +140,9 @@ class _ContactInfoState extends State<ContactInfo> {
                 label: "Your Message",
                 controller: model.messageController,
                 maxLines: 6,
-                backgroundColor: AppColors.darkGrey,
-                borderColor: AppColors.lightGrey,
+                backgroundColor: appColors.contactFieldBackground,
+                borderColor: appColors.contactFieldBorder,
+                inputTextColor: appColors.contactFieldText,
                 hintText: 'Enter your message',
                 validator: (value) {
                   if (value == null || !value.isValidMessage) {
@@ -144,13 +152,13 @@ class _ContactInfoState extends State<ContactInfo> {
                 },
               ),
               GradientHoverButton(
-                isForDark: true,
                 width: double.infinity,
-                gradientColors: [AppColors.primary, AppColors.primary],
+                gradientColors: appColors.contactButtonGradient,
                 label: "Submit",
                 onPressed: () {
                   model.submitForm();
                 },
+                isForDark: appColors.isDark,
                 model: widget.model,
               ),
             ],
@@ -160,13 +168,14 @@ class _ContactInfoState extends State<ContactInfo> {
     );
   }
 
-  Widget _callCard({required double height, required double width}) {
+
+  Widget _callCard({required double height, required double width, required AppColors colors}) {
     return ConstrainedBox(
       constraints: BoxConstraints(maxWidth: width),
       child: Container(
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: colors.certSectionBackground,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Column(
@@ -191,7 +200,7 @@ class _ContactInfoState extends State<ContactInfo> {
                     style: GoogleFonts.instrumentSans(
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
-                      color: Colors.black,
+                      color: colors.textPrimary,
                     ),
                   ),
                   TextSpan(
@@ -200,7 +209,7 @@ class _ContactInfoState extends State<ContactInfo> {
                     style: GoogleFonts.instrumentSans(
                       fontWeight: FontWeight.w400,
                       fontSize: 14,
-                      color: Colors.grey[700],
+                      color: colors.textPrimary.withOpacity(0.5),
                     ),
                   ),
                 ],
@@ -209,15 +218,15 @@ class _ContactInfoState extends State<ContactInfo> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
-                color: AppColors.primary,
+                color: colors.textPrimary,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Text("approximately 15 minutes"),
+              child:  Text("approximately 15 minutes", style: TextStyle(color: colors.primary),),
             ),
             CommonButton(
               width: double.infinity,
               buttonBackColor: Colors.transparent,
-              containerBorder: Border.all(color: AppColors.grey),
+              containerBorder: Border.all(color: colors.textPrimary),
               label: "Chat on WhatsApp",
               iconWidget: Image.network(
                 "${AppConstants().configConstants.imageBaseUrl}assets/icons/whatapp_icon.png",

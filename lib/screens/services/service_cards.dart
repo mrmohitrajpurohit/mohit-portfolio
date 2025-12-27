@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/constants/app_constants.dart';
-import '../../core/theme/colors.dart';
+import '../../core/theme/app_colors.dart';
 import 'hover_scroll_card.dart';
 
 class ServiceCard extends StatefulWidget {
@@ -40,6 +40,7 @@ class _ServiceCardState extends State<ServiceCard> {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = AppColors.of(context);
     return LayoutBuilder(
       builder: (context, constraints) {
         final screenWidth = constraints.maxWidth;
@@ -77,7 +78,7 @@ class _ServiceCardState extends State<ServiceCard> {
                   spacing: spacing,
                   imageSize: imageSize,
                   textColor:
-                      widget.highlight ? AppColors.white : AppColors.black,
+                      widget.highlight ? appColors.white : appColors.black,
                   titleFontSize: titleFontSize,
                   descriptionFontSize: descriptionFontSize,
                   tagFontSize: tagFontSize,

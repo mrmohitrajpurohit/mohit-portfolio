@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../theme/colors.dart';
+import '../theme/app_colors.dart';
 import '../utils/keys.dart';
 
 enum ToastType { success, error, warning, info }
@@ -17,7 +17,6 @@ class ToastService {
     if (context == null) return;
 
     final overlay = Overlay.of(context);
-    if (overlay == null) return;
 
     late OverlayEntry overlayEntry;
 
@@ -84,6 +83,7 @@ class _ToastWidgetState extends State<_ToastWidget>
 
   @override
   Widget build(BuildContext context) {
+    final appColors = AppColors.of(context);
     final background = _backgroundColor(widget.type);
     final icon = _toastIcon(widget.type);
     final screenWidth = MediaQuery.of(context).size.width;
@@ -130,7 +130,7 @@ class _ToastWidgetState extends State<_ToastWidget>
                         style: GoogleFonts.instrumentSans(
                           fontSize: 17,
                           fontWeight: FontWeight.w500,
-                          color: AppColors.primary,
+                          color: appColors.primary,
                           wordSpacing: 2,
                         ),
                       ),
@@ -152,7 +152,7 @@ class _ToastWidgetState extends State<_ToastWidget>
                     style: GoogleFonts.instrumentSans(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.primary,
+                      color: appColors.primary,
                       wordSpacing: 2,
                     ),
                   ),

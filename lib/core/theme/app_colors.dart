@@ -8,9 +8,51 @@ class AppColors {
 
   bool get isDark => Theme.of(context).brightness == Brightness.dark;
 
+  // =====================================================
+  // CORE PALETTE (THEME-AWARE)
+  // =====================================================
+
+  Color get primary =>
+      isDark ? const Color(0xFF101010) : const Color(0xFFF7F7F7);
+
+  Color get primaryVariant => const Color(0xFFF7F7F7);
+
+  Color get secondary =>
+      isDark ? const Color(0xFF212121) : const Color(0xFFD1D3D6);
+
+  Color get white =>
+      isDark ? const Color(0xFF101010) : const Color(0xFFFFFFFF);
+
+  Color get black =>
+      isDark ? const Color(0xFFFFFFFF) : const Color(0xFF000000);
+
+  Color get greyBlack =>
+      isDark ? const Color(0xFF1F1F1F) : const Color(0xFF303030);
+
+  Color get grey =>
+      isDark ? const Color(0xFF9AA0A6) : const Color(0xFF6C7179);
+
+  Color get lightGrey =>
+      isDark ? const Color(0xFFB0B0B0) : const Color(0xFF888888);
+
+  Color get darkGrey =>
+      isDark ? const Color(0xFF303030) : const Color(0xFF1F1F1F);
+
+  Color get accent =>
+      isDark ? const Color(0xFFFFE066) : const Color(0xFFEFCE05);
+
+  Color get lightAccent =>
+      isDark ? const Color(0xFF3A3A00) : const Color(0xFFFEFEE8);
+
+  Color get danger =>
+      const Color(0xFFE74C3C); // universal (good contrast both themes)
+
+  Color get hoverButtonBg =>
+      isDark ? const Color(0xFF9A6BFF) : const Color(0xFF7430F7);
+
   // ================= BACKGROUNDS =================
   Color get navbarBackground =>
-      isDark ? const Color(0xFF1A1A1A) : Colors.white.withOpacity(0.88);
+      isDark ? Colors.black.withOpacity(0.88) : Colors.white.withOpacity(0.88);
 
   Color get scaffoldBackground =>
       Theme.of(context).scaffoldBackgroundColor;
@@ -31,7 +73,13 @@ class AppColors {
 
   // ================= SHADOWS =================
   List<BoxShadow> get navbarShadow => isDark
-      ? const []
+      ? const [
+    BoxShadow(
+      color: Colors.white12,
+      blurRadius: 12,
+      offset: Offset(0, 3),
+    ),
+  ]
       : const [
     BoxShadow(
       color: Colors.black12,
@@ -178,4 +226,50 @@ class AppColors {
 
   Color get skillPercentText =>
       Colors.white70;
+
+  // ================= CONTACT FORM =================
+
+  /// Background gradient for contact card
+  List<Color> get contactCardGradient => isDark
+      ? const [
+    Color(0xFF101010),
+    Color(0xFF212121),
+    Color(0xFF525252),
+    Color(0xFFb4b4b4),
+  ]
+      : const [
+    Color(0xFFb4b4b4),
+    Color(0xFF525252),
+    Color(0xFF212121),
+    Color(0xFF101010),
+  ];
+
+  /// TextField background
+  Color get contactFieldBackground =>
+      isDark ? const Color(0xFF1E1E1E) : Colors.white;
+
+  /// TextField border
+  Color get contactFieldBorder =>
+      isDark ? Colors.white24 : Colors.black26;
+
+  /// Label & input text color
+  Color get contactFieldText =>
+      isDark ? Colors.white : Colors.black;
+
+  Color get contactHintText =>
+      isDark ? Colors.white54 : Colors.black54;
+
+  /// Submit button gradient
+  List<Color> get contactButtonGradient => isDark
+      ? const [
+    Colors.white54,
+    Colors.black54,
+  ]
+      : const [
+    Colors.black54,
+    Colors.white54,
+  ];
+
+  Color get contactButtonText =>
+      isDark ? Colors.black : Colors.white;
 }
