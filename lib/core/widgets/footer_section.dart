@@ -129,7 +129,7 @@ class FooterSection extends StatelessWidget {
           children: [
             TextButton.icon(
               onPressed: () => _open(
-                'https://raw.githubusercontent.com/mrmohitrajpurohit/mohit-portfolio/main/Mohit%20Resume%20Oct%2002%2C%202025.pdf',
+                'https://raw.githubusercontent.com/mrmohitrajpurohit/mohit-portfolio/main/Mohit-Resume.pdf',
               ),
               icon: Icon(Icons.download, size: 16, color: colors.textPrimary),
               label: Text(
@@ -162,7 +162,7 @@ class FooterSection extends StatelessWidget {
                 IconButton(
                   icon: Icon(Icons.download, color: colors.textPrimary),
                   onPressed: () => _open(
-                    'https://raw.githubusercontent.com/mrmohitrajpurohit/mohit-portfolio/main/Mohit%20Resume%20Oct%2002%2C%202025.pdf',
+                    'https://raw.githubusercontent.com/mrmohitrajpurohit/mohit-portfolio/main/Mohit-Resume.pdf',
                   ),
                 ),
                 ThemeToggleSwitch(colors: colors)
