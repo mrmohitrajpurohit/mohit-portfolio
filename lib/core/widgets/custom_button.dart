@@ -12,6 +12,7 @@ class CommonButton extends StatefulWidget {
   final double borderRadius;
   final EdgeInsetsGeometry padding;
   final IconData? icon;
+  final Widget? iconWidget;
   final double? width;
   final bool isForDark;
   final double textSize;
@@ -26,6 +27,7 @@ class CommonButton extends StatefulWidget {
         this.borderRadius = 12.0,
         this.padding = const EdgeInsets.symmetric(horizontal: 24, vertical: 5),
         this.icon,
+        this.iconWidget,
         this.width = 200,
         this.textSize = 12,
         this.containerBorder = const Border.fromBorderSide(
@@ -76,6 +78,9 @@ class _CommonButtonState extends State<CommonButton> {
                     wordSpacing: 2,
                   ),
             ),
+            if (widget.iconWidget != null) ...[
+              widget.iconWidget!
+            ],
             if (widget.icon != null) ...[
               Icon(widget.icon!,
                   color: AppColors.primary,

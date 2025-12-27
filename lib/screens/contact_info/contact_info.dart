@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mohit_portfolio/core/utils/validators.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/constants/app_constants.dart';
 import '../../core/theme/colors.dart';
@@ -217,8 +218,26 @@ class _ContactInfoState extends State<ContactInfo> {
               width: double.infinity,
               buttonBackColor: Colors.transparent,
               containerBorder: Border.all(color: AppColors.grey),
-              label: "Book a Call",
-              onPressed: () {},
+              label: "Chat on WhatsApp",
+              iconWidget: Image.network(
+                "${AppConstants().configConstants.imageBaseUrl}assets/icons/whatapp_icon.png",
+                width: 20,
+                height: 20,
+              ),
+              onPressed: () async {
+                final Uri url = Uri.parse(
+                    'https://wa.me/919982111105?text=Hello%20Mohit%20%F0%9F%91%8B%0A'
+                        'I%20came%20across%20your%20portfolio%20and%20would%20like%20to%20connect%20regarding%20a%20potential%20opportunity.%0A'
+                        'Looking%20forward%20to%20discussing%20further.'
+                );
+                if (!await launchUrl(
+                  url,
+                  mode: LaunchMode.platformDefault,
+                  webOnlyWindowName: '_blank', // 👈 opens in new tab
+                )) {
+                  throw Exception('Could not launch $url');
+                }
+              },
             ),
           ],
         ),
